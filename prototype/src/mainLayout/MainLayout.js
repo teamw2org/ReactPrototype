@@ -32,9 +32,6 @@ function Copyright() {
   );
 }
 
-function changeLayout(layoutId) {
-  console.log(layoutId);
-}
 
 const drawerWidth = 240;
 
@@ -132,7 +129,12 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const childRef = <MainCointainer />;
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  function changeLayout(layoutId) {
+    childRef.changeLayout(layoutId);
+  }
 
   return (
     <div className={classes.root}>
@@ -190,7 +192,7 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <MainCointainer />
+        {childRef}
       </main>
     </div>
   );

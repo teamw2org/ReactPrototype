@@ -1,5 +1,6 @@
 import Container from "@material-ui/core/Container";
 import PublicationTree from "../components/PublicationTree.component";
+import DocumentsGrid from "../components/DocumentsGrid.component";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -13,7 +14,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
+
 export default function MainCointainer() {
+    const publicationTree = <PublicationTree />;
+    const documentsGridTree = <DocumentsGrid />;
+    const [containerComponent] = React.useState(publicationTree);
     const classes = useStyles();
     function Copyright() {
         return (
@@ -28,10 +34,14 @@ export default function MainCointainer() {
         );
     }
 
+    function changeLayout(layoutId) {
+        console.log(layoutId);
+    }
+
   return (
     <div>
       <Container maxWidth="lg" className={classes.container}>
-        <PublicationTree />
+          {containerComponent}
       </Container>
       <Box pt={4}>
         <Copyright />
