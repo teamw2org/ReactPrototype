@@ -18,7 +18,9 @@ import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
+import MainListItems from "./MainListItems";
+import SecondaryListItems from "./SecondaryListItems";
+import PublicationTree from "../components/PublicationTree.component";
 import Logo from "../images/logo.png";
 
 
@@ -33,6 +35,10 @@ function Copyright() {
       {"."}
     </Typography>
   );
+}
+
+function changeLayout(layoutId){
+  console.log(layoutId);
 }
 
 const drawerWidth = 240;
@@ -185,27 +191,14 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List>{<MainListItems changeLayout = {changeLayout}/> }</List>
         <Divider />
-        <List>{secondaryListItems}</List>
+        <List>{<SecondaryListItems />}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}></Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}></Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}></Paper>
-            </Grid>
-          </Grid>
+
           <Box pt={4}>
             <Copyright />
           </Box>
