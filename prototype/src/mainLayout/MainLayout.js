@@ -175,7 +175,7 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          <img src={Logo} className={classes.logo} />
+          <img src={Logo} className={classes.logo} alt="PriintSuite logo" />
           <Typography
             component="h1"
             variant="h6"
