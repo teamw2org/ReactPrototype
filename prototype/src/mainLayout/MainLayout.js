@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,8 +16,12 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MainListItems from "./MainListItems";
 import SecondaryListItems from "./SecondaryListItems";
-import MainCointainer from "./MainCointainer";
+import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
 import Logo from "../images/logo.png";
+import PublicationTree from "../components/PublicationTree.component";
+import DocumentsGrid from "../components/DocumentsGrid.component";
+import FlatPlanning from "../components/FlatPlanning.component";
 
 function Copyright() {
   return (
@@ -121,20 +125,35 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
+
+  const publicationTree = <PublicationTree />;
+  let documentsGrid = null;
+  let flatPlanning = null;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [currentLayoutState, setCurrentLayoutState] = React.useState(publicationTree);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const childRef = <MainCointainer />;
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  function changeLayout(layoutId) {
-    childRef.changeLayout(layoutId);
-  }
+  const changeLayout = (layoutId) => {
+    if("publication" === layoutId){
+      setCurrentLayoutState(publicationTree);
+    } else if("documents" === layoutId){
+      if(documentsGrid == null){
+        documentsGrid = <DocumentsGrid />;
+      }
+      setCurrentLayoutState(documentsGrid);
+    } else if("flat_planning" === layoutId){
+      if(flatPlanning == null){
+        flatPlanning = <FlatPlanning />;
+      }
+      setCurrentLayoutState(flatPlanning);
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -192,7 +211,12 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        {childRef}
+        <Container maxWidth="lg" className={classes.container}>
+          {currentLayoutState}
+        </Container>
+        <Box pt={4}>
+          <Copyright />
+        </Box>
       </main>
     </div>
   );
