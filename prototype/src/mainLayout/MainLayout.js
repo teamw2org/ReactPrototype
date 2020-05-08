@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
-import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
@@ -11,18 +10,14 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MainListItems from "./MainListItems";
 import SecondaryListItems from "./SecondaryListItems";
-import PublicationTree from "../components/PublicationTree.component";
+import MainCointainer from "./MainCointainer";
 import Logo from "../images/logo.png";
-
 
 function Copyright() {
   return (
@@ -37,7 +32,7 @@ function Copyright() {
   );
 }
 
-function changeLayout(layoutId){
+function changeLayout(layoutId) {
   console.log(layoutId);
 }
 
@@ -50,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     width: 32,
     height: 32,
-    marginRight: '10px',
+    marginRight: "10px",
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -63,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   appBar: {
-    backgroundColor: '#00b0bc',
+    backgroundColor: "#00b0bc",
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
@@ -143,7 +138,6 @@ export default function Dashboard() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
-
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
@@ -160,7 +154,7 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          <img src={Logo} className={classes.logo}/>
+          <img src={Logo} className={classes.logo} />
           <Typography
             component="h1"
             variant="h6"
@@ -168,7 +162,6 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-
             Priint
           </Typography>
           <IconButton color="inherit">
@@ -191,18 +184,13 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <List>{<MainListItems changeLayout = {changeLayout}/> }</List>
+        <List>{<MainListItems changeLayout={changeLayout} />}</List>
         <Divider />
         <List>{<SecondaryListItems />}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
+        <MainCointainer />
       </main>
     </div>
   );
