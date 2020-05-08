@@ -19,6 +19,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "./listItems";
+import Logo from "../images/logo.png";
+
 
 function Copyright() {
   return (
@@ -39,6 +41,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
+  logo: {
+    width: 32,
+    height: 32,
+    marginRight: '10px',
+  },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },
@@ -50,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   appBar: {
+    backgroundColor: '#00b0bc',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
@@ -116,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -129,6 +137,7 @@ export default function Dashboard() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
+
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
@@ -145,6 +154,7 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
+          <img src={Logo} className={classes.logo}/>
           <Typography
             component="h1"
             variant="h6"
@@ -152,7 +162,8 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Dashboard
+
+            Priint
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
