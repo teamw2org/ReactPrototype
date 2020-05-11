@@ -21,7 +21,10 @@ import Box from "@material-ui/core/Box";
 import Logo from "../images/logo.png";
 import PublicationTree from "../components/PublicationTree.component";
 import DocumentsGrid from "../components/DocumentsGrid.component";
-import FlatPlanning from "../components/FlatPlanning.component";
+import Task from "../components/Task.component";
+import { Provider } from 'react-redux';
+import { store } from '../redux/Redux';
+import Exaple from "../redux/Example";
 
 function Copyright() {
   return (
@@ -127,6 +130,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
 
   const publicationTree = <PublicationTree />;
+  let taskLayout = null;
   let documentsGrid = null;
   let flatPlanning = null;
   const classes = useStyles();
@@ -147,9 +151,16 @@ export default function Dashboard() {
         documentsGrid = <DocumentsGrid />;
       }
       setCurrentLayoutState(documentsGrid);
+    } else if("task" === layoutId){
+      if(taskLayout == null){
+        taskLayout = <Task />;
+      }
+      setCurrentLayoutState(taskLayout);
     } else if("flat_planning" === layoutId){
       if(flatPlanning == null){
-        flatPlanning = <FlatPlanning />;
+        flatPlanning = <Provider store={store}>
+          <Exaple />
+        </Provider>;
       }
       setCurrentLayoutState(flatPlanning);
     }
@@ -207,7 +218,7 @@ export default function Dashboard() {
         <Divider />
         <List>{<MainListItems changeLayout={changeLayout} />}</List>
         <Divider />
-        <List>{<SecondaryListItems />}</List>
+        <List>{<SecondaryListItems changeLayout={changeLayout}/>}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

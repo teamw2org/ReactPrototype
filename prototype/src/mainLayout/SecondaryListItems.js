@@ -8,11 +8,11 @@ import FolderSpecialIcon from '@material-ui/icons/FolderSpecial';
 import DescriptionIcon from '@material-ui/icons/Description';
 import BorderClearIcon from '@material-ui/icons/BorderClear';
 
-export default function secondaryListItems() {
+export default function secondaryListItems(props) {
     return (
         <div>
             <ListSubheader inset>Saved reports</ListSubheader>
-            <ListItem button>
+            <ListItem button onClick={props.changeLayout.bind(null, "task")}>
                 <ListItemIcon>
                     <AssignmentIcon/>
                 </ListItemIcon>
