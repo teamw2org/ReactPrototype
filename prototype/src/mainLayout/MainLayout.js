@@ -22,6 +22,7 @@ import Logo from "../images/logo.png";
 import PublicationTree from "../components/PublicationTree.component";
 import DocumentsGrid from "../components/DocumentsGrid.component";
 import Task from "../components/Task.component";
+import Users from "../components/Users.component"
 import { Provider } from 'react-redux';
 import { store } from '../redux/Redux';
 import Exaple from "../redux/Example";
@@ -115,6 +116,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
+    height:'85%',
   },
   paper: {
     padding: theme.spacing(2),
@@ -132,6 +134,7 @@ export default function Dashboard() {
   const publicationTree = <PublicationTree />;
   let taskLayout = null;
   let documentsGrid = null;
+  let usersLayout = null;
   let flatPlanning = null;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -156,6 +159,11 @@ export default function Dashboard() {
         taskLayout = <Task />;
       }
       setCurrentLayoutState(taskLayout);
+    }  else if("users" === layoutId){
+      if(usersLayout == null){
+        usersLayout = <Users />;
+      }
+      setCurrentLayoutState(usersLayout);
     } else if("flat_planning" === layoutId){
       if(flatPlanning == null){
         flatPlanning = <Provider store={store}>
@@ -222,7 +230,7 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
+        <Container maxWidth="xl" className={classes.container}>
           {currentLayoutState}
         </Container>
         <Box pt={4}>

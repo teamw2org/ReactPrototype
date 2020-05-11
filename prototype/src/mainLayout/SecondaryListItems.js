@@ -4,31 +4,30 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import FolderSpecialIcon from '@material-ui/icons/FolderSpecial';
-import DescriptionIcon from '@material-ui/icons/Description';
-import BorderClearIcon from '@material-ui/icons/BorderClear';
+import GroupIcon from '@material-ui/icons/Group';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
 export default function secondaryListItems(props) {
     return (
         <div>
-            <ListSubheader inset>Saved reports</ListSubheader>
+            <ListSubheader inset>Administration</ListSubheader>
             <ListItem button onClick={props.changeLayout.bind(null, "task")}>
                 <ListItemIcon>
-                    <AssignmentIcon/>
+                    <FormatListBulletedIcon/>
                 </ListItemIcon>
-                <ListItemText primary="Current month"/>
+                <ListItemText primary="Tasks"/>
             </ListItem>
             <ListItem button>
                 <ListItemIcon>
                     <AssignmentIcon/>
                 </ListItemIcon>
-                <ListItemText primary="Last quarter"/>
+                <ListItemText primary="Not implemented"/>
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={props.changeLayout.bind(null, "users")}>
                 <ListItemIcon>
-                    <AssignmentIcon/>
+                    <GroupIcon/>
                 </ListItemIcon>
-                <ListItemText primary="Year-end sale"/>
+                <ListItemText primary="Users"/>
             </ListItem>
         </div>
     );
