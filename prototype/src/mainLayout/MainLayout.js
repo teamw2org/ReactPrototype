@@ -19,7 +19,7 @@ import SecondaryListItems from "./SecondaryListItems";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Logo from "../images/logo.png";
-import PublicationTree from "../components/PublicationTree.component";
+import BucketsTree from "../components/BucketsTree.component";
 import DocumentsGrid from "../components/DocumentsGrid.component";
 import Task from "../components/Task.component";
 import Users from "../components/Users.component"
@@ -131,14 +131,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
 
-  const publicationTree = <PublicationTree />;
+  const bucketsTree = <BucketsTree />;
   let taskLayout = null;
   let documentsGrid = null;
   let usersLayout = null;
   let flatPlanning = null;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [currentLayoutState, setCurrentLayoutState] = React.useState(publicationTree);
+  const [currentLayoutState, setCurrentLayoutState] = React.useState(bucketsTree);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -147,8 +147,8 @@ export default function Dashboard() {
   };
 
   const changeLayout = (layoutId) => {
-    if("publication" === layoutId){
-      setCurrentLayoutState(publicationTree);
+    if("content" === layoutId){
+      setCurrentLayoutState(bucketsTree);
     } else if("documents" === layoutId){
       if(documentsGrid == null){
         documentsGrid = <DocumentsGrid />;

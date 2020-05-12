@@ -9,11 +9,11 @@ import BorderClearIcon from '@material-ui/icons/BorderClear';
 export default function mainListItems(props){
     return (
     <div>
-        <ListItem button onClick={props.changeLayout.bind(null, "publication")}>
+        <ListItem button onClick={props.changeLayout.bind(null, "content")}>
             <ListItemIcon>
                 <FolderSpecialIcon />
             </ListItemIcon>
-            <ListItemText primary="Publication" />
+            <ListItemText primary="Content" />
         </ListItem>
         <ListItem button onClick={props.changeLayout.bind(null, "documents")}>
             <ListItemIcon>

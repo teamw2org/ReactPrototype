@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -260,7 +260,6 @@ export default function EnhancedTable() {
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, usersState.length - page * rowsPerPage);
 
-    fetchData();
     function fetchData(){
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
@@ -274,6 +273,10 @@ export default function EnhancedTable() {
             })
             .catch(err => console.error(this.props.url, err.toString()))
     }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     function setDataState(responseJson){
         setUsersState(responseJson);
