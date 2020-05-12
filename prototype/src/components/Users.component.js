@@ -21,10 +21,6 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function createData(name, image, username, email, phone, website) {
-    return { name, image, username, email, phone, website };
-}
-
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
@@ -329,7 +325,7 @@ export default function EnhancedTable() {
                                                 {row.name}
                                             </TableCell>
                                             <TableCell>
-                                                {<div><img src={row.image}/></div>}
+                                                {<div><img src={row.image} alt={''}/></div>}
                                             </TableCell>
                                             <TableCell align="right">{row.username}</TableCell>
                                             <TableCell align="right">{row.email}</TableCell>

@@ -148,13 +148,16 @@
 // }
 
 
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import Paper from '@material-ui/core/Paper';
 import { AutoSizer, Column, Table } from 'react-virtualized';
+import AppsIcon from '@material-ui/icons/Apps';
+import IconButton from "@material-ui/core/IconButton";
+import ReorderIcon from '@material-ui/icons/Reorder';
 
 const styles = (theme) => ({
     flexContainer: {
@@ -309,7 +312,13 @@ const rows = prepareData();
     }
 
 export default function DocumentsGrid() {
+    const[viewMode,setViewMode] = useState('grid');
+
     return (
+        <div style={{height:'100%'}}>
+            <IconButton onClick={setViewMode.bind(null,'grid')}><AppsIcon/></IconButton>
+            <IconButton onClick={setViewMode.bind(null,'gallery')}><ReorderIcon/></IconButton>
+            {viewMode === 'grid'?
         <Paper style={{ height: '100%', width: '100%' }}>
             <VirtualizedTable
                 rowCount={rows.length}
@@ -346,6 +355,7 @@ export default function DocumentsGrid() {
                     },
                 ]}
             />
-        </Paper>
+        </Paper>:<div style={{height:'200px', width: '200px', backgroundColor:'red'}}></div>}
+        </div>
     );
 }

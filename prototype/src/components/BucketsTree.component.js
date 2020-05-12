@@ -59,7 +59,7 @@ export default function BucketsTree() {
                             <img
                                 src={
                                     '/PubServerKernel/Globals?img=/entity_icons/' +
-                                    (el.groupIdentifier == null || el.groupIdentifier == ''
+                                    (el.groupIdentifier === null || el.groupIdentifier === ''
                                         ? '2020.gif'
                                         : el.groupIdentifier)
                                 }
@@ -105,7 +105,7 @@ export default function BucketsTree() {
             headers.append('Access-Control-Allow-Credentials', 'true');
             headers.append('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
             headers.append('Access-Control-Allow-Headers', 'Content-Type, Accept');
-            let i = 0;
+
             fetch(
                 'http://localhost:40080/PlannerRESTService/aio/EN/v1/publications/buckets?sessionid=alamakota&parentEntityIdentifier=' +
                 element.entityIdentifier +
@@ -133,7 +133,7 @@ export default function BucketsTree() {
                                 <img
                                     src={
                                         '/PubServerKernel/Globals?img=/entity_icons/' +
-                                        (el.groupIdentifier == null || el.groupIdentifier == ''
+                                        (el.groupIdentifier === null || el.groupIdentifier === ''
                                             ? '2020.gif'
                                             : el.groupIdentifier)
                                     }
