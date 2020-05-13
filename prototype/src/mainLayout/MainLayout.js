@@ -21,7 +21,7 @@ import Box from "@material-ui/core/Box";
 import Logo from "../images/logo.png";
 import BucketsTree from "../components/BucketsTree.component";
 import DocumentsGrid from "../components/DocumentsGrid.component";
-import Task from "../components/Task.component";
+import TreeGrid from "../components/TreeGrid.component";
 import Users from "../components/Users.component"
 import { Provider } from 'react-redux';
 import { store } from '../redux/Redux';
@@ -132,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
 
   const bucketsTree = <BucketsTree />;
-  let taskLayout = null;
+  let contentTreeGridLayout = null;
   let documentsGrid = null;
   let usersLayout = null;
   let flatPlanning = null;
@@ -154,11 +154,11 @@ export default function Dashboard() {
         documentsGrid = <DocumentsGrid />;
       }
       setCurrentLayoutState(documentsGrid);
-    } else if("task" === layoutId){
-      if(taskLayout == null){
-        taskLayout = <Task />;
+    } else if("contentTreeGrid" === layoutId){
+      if(contentTreeGridLayout == null){
+        contentTreeGridLayout = <TreeGrid />;
       }
-      setCurrentLayoutState(taskLayout);
+      setCurrentLayoutState(contentTreeGridLayout);
     }  else if("users" === layoutId){
       if(usersLayout == null){
         usersLayout = <Users />;
@@ -202,7 +202,7 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Priint
+            priint:suite
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">

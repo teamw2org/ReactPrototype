@@ -11,11 +11,11 @@ export default function secondaryListItems(props) {
     return (
         <div>
             <ListSubheader inset>Administration</ListSubheader>
-            <ListItem button onClick={props.changeLayout.bind(null, "task")}>
+            <ListItem button onClick={props.changeLayout.bind(null, "contentTreeGrid")}>
                 <ListItemIcon>
                     <FormatListBulletedIcon/>
                 </ListItemIcon>
-                <ListItemText primary="Tasks"/>
+                <ListItemText primary="Content Tree Grid"/>
             </ListItem>
             <ListItem button>
                 <ListItemIcon>
