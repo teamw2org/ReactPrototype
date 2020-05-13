@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import VirtualDraggableGrid from 'react-virtual-draggable-grid';
 
 const ItemComponent = props => {
-    const { name, styles } = props;
+    const { rowTMP, imgNr, styles } = props;
 
     return (
         <div
@@ -11,7 +11,7 @@ const ItemComponent = props => {
                 userSelect: 'none',
                 border: '1px solid black',
                 fontFamily: 'sans-serif',
-                background: '#91c6a6',
+                background: 'transparent',
                 ...styles,
             }}
         >
@@ -21,10 +21,9 @@ const ItemComponent = props => {
                 margin: 0,
                 width: '100%',
             }}>
-            <img src={`https://i.picsum.photos/id/${name * 15}/198/300.jpg`} alt={""}/>
+            <img src={`https://i.picsum.photos/id/${imgNr}/198/300.jpg`} alt={""}/>
             </div>
-            <button
-                type="button"
+            <div
                 style={{
                     cursor: 'pointer',
                     boxSizing: 'border-box',
@@ -36,11 +35,13 @@ const ItemComponent = props => {
                     borderColor: 'black',
                     background: '#ccc',
                     fontSize: 18,
+                    paddingTop:'6px',
+                    textAlign: 'center',
                 }}
-                onClick={() => console.log('Clicked without initiating drag', name)}
+                onClick={() => alert(`Name: ${rowTMP.name}, Last name: ${rowTMP.lastname}, Username: ${rowTMP.username}, Retweet: ${rowTMP.retweet}, Likes: ${rowTMP.likes}`)}
             >
-                {`Prevent Button Drag`}
-            </button>
+                {`${rowTMP.name}`}
+            </div>
         </div>
     );
 };
@@ -58,6 +59,23 @@ export default class Grid extends React.Component {
     constructor(props) {
         super(props);
 
+        const rows = prepareData();
+
+        function createData(id, name, lastname, username, retweet, likes) {
+            return { id, name, lastname, username, retweet, likes };
+        }
+
+        function prepareData(){
+            let preparedData = [];
+            var data = require('../fakeData/fake10000.json');
+            let i =0;
+            for (const element of data.data) {
+                i+=1;
+                preparedData.push(createData(i, element.user.firstname + i, element.user.lastname, element.user.username, element.retweet, element.likes, ))
+            }
+            return preparedData;
+        }
+
         const item = {
             fixedWidth: 200,
             fixedHeight: 340,
@@ -70,20 +88,31 @@ export default class Grid extends React.Component {
             },
         };
 
-        const x = 3;
-        const y = 2;
+        const x = 8;
+        const y = 1250;
         const items = [];
 
+        let i = 0;
         for (let iY = 0; iY < y; iY += 1) {
             const row = [];
             items.push(row);
             for (let iX = 0; iX < x; iX += 1) {
+                if(rows.length === i){
+                    break;
+                }
+                const rowTMP = rows[i];
+                i++;
                 const newItem = { ...item };
                 const increment = iX + iY * x;
                 const key = `item-${increment}`;
+                let imgNumber = increment%1000;
+                const imgArray = [138, 540, 673, 801, 934, 205, 207, 332, 333, 470, 463, 597, 601, 734, 138, 262, 394, 801, 934, 333, 332, 463, 462, 601, 592, 597, 595, 725, 734, 262, 394, 792, 463, 462, 597, 589, 595, 587, 592, 720, 725, 854, 262, 394, 792, 917, 920, 587, 720, 589, 592, 714, 725, 850, 854, 246, 647, 920, 917, 709, 578, 587, 712, 711, 710, 714, 720, 713, 850, 843, 246, 245, 647, 644, 917, 438, 578, 706, 707, 711, 710, 708, 712, 709, 714, 713, 843, 245, 105, 246, 578, 245, 246, 636, 644, 771, 303, 438, 707, 706, 709, 710, 708, 843, 968, 105, 636, 632, 771, 763, 899, 897, 438, 303, 298, 561, 697, 968, 963, 97, 226, 359, 636, 632, 895, 763, 761, 759, 762, 899, 897, 298 ];
+                if(imgArray.includes(imgNumber)){
+                    imgNumber = 1;
+                }
 
                 newItem.key = key;
-                newItem.itemProps = { ...item.itemProps, name: increment };
+                newItem.itemProps = { ...item.itemProps, name: '-' + increment, imgNr: imgNumber, rowTMP: rowTMP };
                 newItem.fixedWidth = item.fixedWidth;
                 newItem.fixedHeight = item.fixedHeight;
 
@@ -102,7 +131,7 @@ export default class Grid extends React.Component {
 
     render() {
         return (
-            <div style={{ width: '100vw', height: '100vh', margin: 20 }}>
+            <div style={{ width: '100%', height: '83vh' }}>
                 <VirtualDraggableGrid
                     items={this.state.items}
                     noDragElements={['button']}
