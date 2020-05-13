@@ -20,18 +20,16 @@ const ItemComponent = props => {
                 justifyContent: 'center',
                 margin: 0,
                 width: '100%',
-                height: '60%',
-                fontSize: 18,
             }}>
-            <img src={`https://i.picsum.photos/id/${name * 15}/100/100.jpg`} alt={""}/>
+            <img src={`https://i.picsum.photos/id/${name * 15}/198/300.jpg`} alt={""}/>
             </div>
             <button
                 type="button"
                 style={{
                     cursor: 'pointer',
                     boxSizing: 'border-box',
-                    width: '100%',
-                    height: '40%',
+                    width: '198px',
+                    height: '38px',
                     boxShadow: 'none',
                     borderWidth: '1px 0 0 0',
                     borderStyle: 'solid',
@@ -62,12 +60,12 @@ export default class Grid extends React.Component {
 
         const item = {
             fixedWidth: 200,
-            fixedHeight: 100,
+            fixedHeight: 340,
             ItemComponent,
             itemProps: {
                 styles: {
-                    width: 'calc(100% - 2px)',
-                    height: 'calc(100% - 2px)',
+                    width: '200px',
+                    height: '340px',
                 },
             },
         };
@@ -86,8 +84,8 @@ export default class Grid extends React.Component {
 
                 newItem.key = key;
                 newItem.itemProps = { ...item.itemProps, name: increment };
-                newItem.fixedWidth = item.fixedWidth + 20;
-                newItem.fixedHeight = item.fixedHeight + 20;
+                newItem.fixedWidth = item.fixedWidth;
+                newItem.fixedHeight = item.fixedHeight;
 
                 row.push(newItem);
             }
