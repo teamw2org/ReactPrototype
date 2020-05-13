@@ -158,6 +158,7 @@ import { AutoSizer, Column, Table } from 'react-virtualized';
 import AppsIcon from '@material-ui/icons/Apps';
 import IconButton from "@material-ui/core/IconButton";
 import ReorderIcon from '@material-ui/icons/Reorder';
+import FakeGallery from "./FakeGallery";
 
 const styles = (theme) => ({
     flexContainer: {
@@ -355,7 +356,7 @@ export default function DocumentsGrid() {
                     },
                 ]}
             />
-        </Paper>:<div style={{height:'200px', width: '200px', backgroundColor:'red'}}></div>}
+        </Paper>:<FakeGallery />}
         </div>
     );
 }
