@@ -16,19 +16,16 @@ const ItemComponent = props => {
                 ...styles,
             }}
         >
-            <p
+            <img
                 style={{
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center',
                     margin: 0,
                     width: '100%',
                     height: '60%',
                     fontSize: 18,
                 }}
-            >
-                {`Draggable ${name}!`}
-            </p>
+                src={`https://i.picsum.photos/id/${name * 15}/100/100.jpg`}/>
             <button
                 type="button"
                 style={{
@@ -89,7 +86,7 @@ export default class Grid extends React.Component {
                 const key = `item-${increment}`;
 
                 newItem.key = key;
-                newItem.itemProps = { ...item.itemProps, name: key };
+                newItem.itemProps = { ...item.itemProps, name: increment };
                 newItem.fixedWidth = item.fixedWidth + 20 * increment;
                 newItem.fixedHeight = item.fixedHeight + 20 * increment;
 
@@ -112,6 +109,7 @@ export default class Grid extends React.Component {
                 <VirtualDraggableGrid
                     items={this.state.items}
                     noDragElements={['button']}
+                    fixedRows={true}
                     gutterX={10}
                     gutterY={10}
                     scrollBufferX={400}
