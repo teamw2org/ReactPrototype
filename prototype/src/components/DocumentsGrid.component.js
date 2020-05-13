@@ -317,8 +317,8 @@ export default function DocumentsGrid() {
 
     return (
         <div style={{height:'100%'}}>
-            <IconButton onClick={setViewMode.bind(null,'grid')}><AppsIcon/></IconButton>
-            <IconButton onClick={setViewMode.bind(null,'gallery')}><ReorderIcon/></IconButton>
+            <IconButton onClick={setViewMode.bind(null,'grid')}><ReorderIcon/></IconButton>
+            <IconButton onClick={setViewMode.bind(null,'gallery')}><AppsIcon/></IconButton>
             {viewMode === 'grid'?
         <Paper style={{ height: '100%', width: '100%' }}>
             <VirtualizedTable
