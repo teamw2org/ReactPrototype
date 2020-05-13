@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import VirtualDraggableGrid from 'react-virtual-draggable-grid';
 
@@ -16,16 +15,16 @@ const ItemComponent = props => {
                 ...styles,
             }}
         >
-            <img
-                style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    margin: 0,
-                    width: '100%',
-                    height: '60%',
-                    fontSize: 18,
-                }}
-                src={`https://i.picsum.photos/id/${name * 15}/100/100.jpg`}/>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                margin: 0,
+                width: '100%',
+                height: '60%',
+                fontSize: 18,
+            }}>
+            <img src={`https://i.picsum.photos/id/${name * 15}/100/100.jpg`} alt={""}/>
+            </div>
             <button
                 type="button"
                 style={{
@@ -87,8 +86,8 @@ export default class Grid extends React.Component {
 
                 newItem.key = key;
                 newItem.itemProps = { ...item.itemProps, name: increment };
-                newItem.fixedWidth = item.fixedWidth + 20 * increment;
-                newItem.fixedHeight = item.fixedHeight + 20 * increment;
+                newItem.fixedWidth = item.fixedWidth + 20;
+                newItem.fixedHeight = item.fixedHeight + 20;
 
                 row.push(newItem);
             }
