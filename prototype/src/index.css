@@ -19,3 +19,11 @@ code {
 .pi-chevron-down:before {
   content: "\e906" !important;
 }
+.ant-tree{
+  max-height: 100%;
+  overflow: auto;
+}
+
+.ant-tree-list-holder-inner {
+background-color: #fafafa;
+}
