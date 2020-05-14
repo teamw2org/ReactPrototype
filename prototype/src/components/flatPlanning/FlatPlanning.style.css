@@ -1,0 +1,23 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+#content{
+    width: 70%;
+    height: 100%;
+    background-color: crimson;
+}
+
+.p-treetable-scrollable-wrapper{
+    height: 100% !important;
+}
+
+.p-treetable-scrollable-view{
+    height: 100% !important;
+}
+
+.p-treetable-scrollable-body{
+    max-height: 100% !important;
+}

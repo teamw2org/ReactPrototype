@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -22,10 +22,8 @@ import Logo from "../images/logo.png";
 import BucketsTree from "../components/BucketsTree.component";
 import DocumentsGrid from "../components/DocumentsGrid.component";
 import TreeGrid from "../components/TreeGrid.component";
-import Users from "../components/Users.component"
-import { Provider } from 'react-redux';
-import { store } from '../redux/Redux';
-import Exaple from "../redux/Example";
+import Users from "../components/Users.component";
+import FlatPlanning from "../components/flatPlanning/FlatPlanning.component";
 
 function Copyright() {
   return (
@@ -39,7 +37,6 @@ function Copyright() {
     </Typography>
   );
 }
-
 
 const drawerWidth = 240;
 
@@ -116,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
-    height:'85%',
+    height: "85%",
   },
   paper: {
     padding: theme.spacing(2),
@@ -130,7 +127,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
-
   const bucketsTree = <BucketsTree />;
   let contentTreeGridLayout = null;
   let documentsGrid = null;
@@ -138,7 +134,9 @@ export default function Dashboard() {
   let flatPlanning = null;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [currentLayoutState, setCurrentLayoutState] = React.useState(bucketsTree);
+  const [currentLayoutState, setCurrentLayoutState] = React.useState(
+    bucketsTree
+  );
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -147,28 +145,26 @@ export default function Dashboard() {
   };
 
   const changeLayout = (layoutId) => {
-    if("content" === layoutId){
+    if ("content" === layoutId) {
       setCurrentLayoutState(bucketsTree);
-    } else if("documents" === layoutId){
-      if(documentsGrid == null){
+    } else if ("documents" === layoutId) {
+      if (documentsGrid == null) {
         documentsGrid = <DocumentsGrid />;
       }
       setCurrentLayoutState(documentsGrid);
-    } else if("contentTreeGrid" === layoutId){
-      if(contentTreeGridLayout == null){
+    } else if ("contentTreeGrid" === layoutId) {
+      if (contentTreeGridLayout == null) {
         contentTreeGridLayout = <TreeGrid />;
       }
       setCurrentLayoutState(contentTreeGridLayout);
-    }  else if("users" === layoutId){
-      if(usersLayout == null){
+    } else if ("users" === layoutId) {
+      if (usersLayout == null) {
         usersLayout = <Users />;
       }
       setCurrentLayoutState(usersLayout);
-    } else if("flat_planning" === layoutId){
-      if(flatPlanning == null){
-        flatPlanning = <Provider store={store}>
-          <Exaple />
-        </Provider>;
+    } else if ("flat_planning" === layoutId) {
+      if (flatPlanning == null) {
+        flatPlanning = <FlatPlanning />;
       }
       setCurrentLayoutState(flatPlanning);
     }
@@ -226,7 +222,7 @@ export default function Dashboard() {
         <Divider />
         <List>{<MainListItems changeLayout={changeLayout} />}</List>
         <Divider />
-        <List>{<SecondaryListItems changeLayout={changeLayout}/>}</List>
+        <List>{<SecondaryListItems changeLayout={changeLayout} />}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
