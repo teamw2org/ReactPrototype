@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TreeGrid from "../TreeGrid.component";
 import "./FlatPlanning.style.css";
 import Splitter from "m-react-splitters";
@@ -27,6 +27,16 @@ export default function FlatPlanning() {
         >
           <TreeGrid sizeInPercentage="calc(100% - 37px)" key="1" />
           <TreeGrid sizeInPercentage="calc(100% - 37px)" key="2" />
+          {useEffect(() =>
+            document
+              .querySelector(".handle-bar")
+              .addEventListener("dblclick", () => {
+                const primaryPane = document.querySelector(".primary");
+                primaryPane.style.height !== "calc(100% - 10px)"
+                  ? (primaryPane.style.height = "calc(100% - 10px)")
+                  : (primaryPane.style.height = "50%");
+              })
+          )}
         </Splitter>
       </div>
     </div>

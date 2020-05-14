@@ -21,3 +21,7 @@
 .p-treetable-scrollable-body{
     max-height: 100% !important;
 }
+
+.p-treetable-scrollable-header-box{
+    margin-right: 0 !important;
+}

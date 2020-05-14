@@ -3,16 +3,16 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "../index.css";
 
-import React, { lazy, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TreeTable } from "primereact/treetable";
 import { Column } from "primereact/column";
 import base64 from "react-native-base64";
 
 const TreeGrid = (props) => {
   const [data, setData] = useState({ nodes: [] });
-  const [loading, setLoading] = useState([false]);
+  const [loading, setLoading] = useState(false);
   const sizeInPercentage = !props.sizeInPercentage
-    ? "50%"
+    ? "100%"
     : props.sizeInPercentage;
 
   useEffect(() => {
@@ -143,6 +143,7 @@ const TreeGrid = (props) => {
         alwaysShowPaginator={false}
         rowsPerPageOptions={[5, 10, 20, 50, 100]}
         scrollable={true}
+        loading={loading}
       >
         <Column
           field="name"
