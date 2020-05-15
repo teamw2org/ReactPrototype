@@ -152,8 +152,8 @@ const TreeGrid = (props) => {
           sortable
           reorderable={true}
         ></Column>
-        <Column field="identifier" header="Identifier"></Column>
-        <Column field="type" header="Type"></Column>
+        <Column field="identifier" header="Identifier" sortable></Column>
+        <Column field="type" header="Type" sortable></Column>
       </TreeTable>
     </div>
   );
