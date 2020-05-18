@@ -23,6 +23,7 @@ import BucketsTree from "../components/BucketsTree.component";
 import DocumentsGrid from "../components/DocumentsGrid.component";
 import TreeGrid from "../components/TreeGrid.component";
 import Users from "../components/Users.component";
+import Task from "../components/Task.component";
 import FlatPlanning from "../components/flatPlanning/FlatPlanning.component";
 
 function Copyright() {
@@ -167,6 +168,8 @@ export default function Dashboard() {
         flatPlanning = <FlatPlanning />;
       }
       setCurrentLayoutState(flatPlanning);
+    } else {
+      setCurrentLayoutState(<Task />);
     }
   };
 

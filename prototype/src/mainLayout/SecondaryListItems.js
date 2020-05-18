@@ -17,7 +17,7 @@ export default function secondaryListItems(props) {
                 </ListItemIcon>
                 <ListItemText primary="Content Tree Grid"/>
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={props.changeLayout.bind(null, "task")}>
                 <ListItemIcon>
                     <AssignmentIcon/>
                 </ListItemIcon>
