@@ -17,9 +17,15 @@ export default function TreeRow(props){
         }
     });
 
-    const { row, onExpand, depth} = props;
+    const { row, cells, onExpand, depth} = props;
     const [open, setOpen] = React.useState(row.expanded);
     const classes = useRowStyles();
+
+    const createTableCells = () =>{
+        for (const element of cells) {
+
+        }
+    }
 
     return (
         <React.Fragment>
