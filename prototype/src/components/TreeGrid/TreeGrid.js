@@ -14,7 +14,7 @@ export default function TreeGrid(props) {
   const [columnssState, setColumns] = React.useState([]);
   const [bodyKey, setBodyKey] = React.useState(Math.random());
 
-  const { rows, columns, onExpand } = props;
+  const { rows, columns, onExpand, onSort } = props;
   const [orders, setOrder] = React.useState({
     order: "asc",
     orderBy: "calories",
@@ -29,15 +29,8 @@ export default function TreeGrid(props) {
   const handleRequestSort = React.useCallback((event, property) => {
     let orders = refValue.current;
     const isAsc = orders.orderBy === property && orders.order === "asc";
-    const newOrder = isAsc ? "desc" : "asc";
-    const elementsList = [];
-    createCellsElements(elementsList, columns, newOrder, property);
-    setColumns(elementsList);
-
-    const sortOrder = stableSort(rows, getComparator(newOrder, property));
-    generateRows(sortOrder);
     setOrder({ order: isAsc ? "desc" : "asc", orderBy: property });
-    setBodyKey(Math.random());
+    onSort();
   });
 
   useEffect(() => {
@@ -152,7 +145,7 @@ export default function TreeGrid(props) {
         <TableHead>
           <TableRow>{columnssState}</TableRow>
         </TableHead>
-        <TableBody key={Math.random()}>{rowsState}</TableBody>
+        <TableBody>{rowsState}</TableBody>
       </Table>
     </TableContainer>
   );

@@ -28,6 +28,11 @@ export default function Task() {
     }
   };
 
+  const handleSortChange = () => {
+    let rowsState1 = [...rowsState];
+    setRowsState(rowsState1);
+  };
+
   function loadData(parentEntity, parentIdentifier, row) {
     let headers = new Headers();
     headers.set(
@@ -56,7 +61,6 @@ export default function Task() {
             label: el.label,
             identifier: el.identifier,
             entityBucketId: el.entityBucketId,
-            children: [],
           };
         });
         setChildren(dataForTree, row);
@@ -91,6 +95,7 @@ export default function Task() {
         },
       ]}
       onExpand={handleExpandChange}
+      onSort={handleSortChange}
     />
   );
 }
