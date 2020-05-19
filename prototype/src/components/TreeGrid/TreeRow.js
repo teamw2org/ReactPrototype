@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
@@ -16,55 +16,66 @@ export default function TreeRow(props) {
     },
   });
 
-  const { row, cells, onExpand, depth } = props;
+  const { row, columns, onExpand, depth } = props;
   const [open, setOpen] = React.useState(row.expanded);
+  const [columnsState, setColumnsState] = React.useState();
   const classes = useRowStyles();
 
+  useEffect(() => {
+    setColumnsState(createTableCells());
+  }, [columns]);
+
   const createTableCells = () => {
-    for (const element of cells) {
+    let firstElement = true;
+    let elementsList = [];
+    for (const element of columns) {
+      if (firstElement) {
+        elementsList.push(createFirstColumn(element.dataKey));
+        firstElement = false;
+      } else {
+        elementsList.push(createColumn(element.dataKey));
+      }
     }
+    return elementsList;
+  };
+
+  const createFirstColumn = (name) => {
+    return (
+      <TableCell
+        style={{
+          paddingLeft: depth + "px",
+          paddingRight: "0px",
+          width: "100px !important",
+        }}
+        component="th"
+        scope="row"
+      >
+        <IconButton
+          aria-label="expand row"
+          size="small"
+          onClick={() => {
+            setOpen(!open);
+            onExpand({ row: row, isExpanded: !open });
+          }}
+        >
+          {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
+        </IconButton>
+        {row[name]}
+      </TableCell>
+    );
+  };
+
+  const createColumn = (name) => {
+    return (
+      <TableCell align="right" style={{ width: 160 }}>
+        {row[name]}
+      </TableCell>
+    );
   };
 
   return (
     <React.Fragment>
-      <TableRow>
-        <TableCell
-          style={{
-            paddingLeft: depth + "px",
-            paddingRight: "0px",
-            width: "100px !important",
-          }}
-          component="th"
-          scope="row"
-        >
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => {
-              setOpen(!open);
-              onExpand({ row: row, isExpanded: !open });
-            }}
-          >
-            {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
-          </IconButton>
-          {row.name}
-        </TableCell>
-        <TableCell align="right" style={{ width: 160 }}>
-          {row.calories}
-        </TableCell>
-        <TableCell align="right" style={{ width: 160 }}>
-          {row.fat}
-        </TableCell>
-        <TableCell align="right" style={{ width: 160 }}>
-          {row.carbs}
-        </TableCell>
-        <TableCell align="right" style={{ width: 160 }}>
-          {row.protein}
-        </TableCell>
-        <TableCell align="right" style={{ width: 160 }}>
-          {row.price}
-        </TableCell>
-      </TableRow>
+      <TableRow>{columnsState}</TableRow>
     </React.Fragment>
   );
 }

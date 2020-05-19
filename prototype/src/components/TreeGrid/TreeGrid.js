@@ -88,6 +88,7 @@ export default function TreeGrid(props) {
         <TreeRow
           key={element.name}
           depth={depth}
+          columns={columns}
           onExpand={(e) => {
             onExpand(e);
             expandedEvent(e);
