@@ -4,19 +4,20 @@ import TableCell from "@material-ui/core/TableCell";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 
-TreeCell.propTypes = {
-  classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
+// TreeCell.propTypes = {
+//   classes: PropTypes.object.isRequired,
+//   numSelected: PropTypes.number.isRequired,
+//   onRequestSort: PropTypes.func.isRequired,
+//   onSelectAllClick: PropTypes.func.isRequired,
+//   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
+//   orderBy: PropTypes.string.isRequired,
+//   rowCount: PropTypes.number.isRequired,
+// };
 
 export default function TreeCell(props) {
   const { classes, column, onRequestSort, order, orderBy } = props;
   const cellAllign = column.align ? column.align : "left";
+  const [bodyKey, setBodyKey] = React.useState(Math.random());
 
   let useStyles1 = makeStyles((theme) => ({
     root: {
@@ -59,6 +60,7 @@ export default function TreeCell(props) {
         sortDirection={orderBy === column.dataKey ? order : false}
       >
         <TableSortLabel
+          key={Math.random()}
           active={orderBy === column.dataKey}
           direction={orderBy === column.dataKey ? order : "asc"}
           onClick={createSortHandler(column.dataKey)}

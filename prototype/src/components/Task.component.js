@@ -20,8 +20,11 @@ export default function Task() {
   }, []);
 
   const handleExpandChange = (e) => {
+    let rowsState1 = [...rowsState];
     if (!e.row.children || e.row.children.length == 0) {
       loadData(e.row.entityBucketId, e.row.identifier, e.row);
+    } else {
+      setRowsState(rowsState1);
     }
   };
 

@@ -11,6 +11,8 @@ import TreeCell from "./TreeCell";
 export default function TreeGrid(props) {
   const [rowsState, setRows] = React.useState([]);
   const [columnssState, setColumns] = React.useState([]);
+  const [bodyKey, setBodyKey] = React.useState(Math.random());
+
   const { rows, columns, onExpand } = props;
   const [orders, setOrder] = React.useState({
     order: "asc",
@@ -34,10 +36,16 @@ export default function TreeGrid(props) {
     const sortOrder = stableSort(rows, getComparator(newOrder, property));
     generateRows(sortOrder);
     setOrder({ order: isAsc ? "desc" : "asc", orderBy: property });
+    setBodyKey(Math.random());
   });
 
   useEffect(() => {
-    generateRows(rows);
+    let orders = refValue.current;
+    const sortOrder = stableSort(
+      rows,
+      getComparator(orders.order, orders.orderBy)
+    );
+    generateRows(sortOrder);
   }, [rows]);
 
   useEffect(() => {
@@ -46,13 +54,14 @@ export default function TreeGrid(props) {
     setColumns(elementsList);
   }, [columns]);
 
-  const expandedEvent = (e) => {
+  const thisExpandedEvent = (e) => {
     if (!e.isExpanded) {
       e.row.expanded = false;
     } else {
       e.row.expanded = true;
     }
-    generateRows(rows);
+    onExpand(e);
+    setBodyKey(Math.random());
   };
 
   const generateRows = (rowsArray) => {
@@ -70,6 +79,7 @@ export default function TreeGrid(props) {
     for (const element of cellElements) {
       cellElementsList.push(
         <TreeCell
+          //key={Math.random()}
           order={newOrder}
           orderBy={newOrderBy}
           onRequestSort={handleRequestSort}
@@ -85,12 +95,12 @@ export default function TreeGrid(props) {
     for (const element of elementsRows) {
       rowElementsList.push(
         <TreeRow
+          key={Math.random()}
           key={element.name}
           depth={depth}
           columns={columns}
           onExpand={(e) => {
-            onExpand(e);
-            expandedEvent(e);
+            thisExpandedEvent(e);
           }}
           row={element}
         />
@@ -119,13 +129,20 @@ export default function TreeGrid(props) {
   }
 
   function stableSort(array, comparator) {
-    const stabilizedThis = array.map((el, index) => [el, index]);
-    stabilizedThis.sort((a, b) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) return order;
-      return a[1] - b[1];
-    });
-    return stabilizedThis.map((el) => el[0]);
+    if (array) {
+      const stabilizedThis = array.map((el, index) => [el, index]);
+      stabilizedThis.sort((a, b) => {
+        const order = comparator(a[0], b[0]);
+        if (order !== 0) return order;
+        return a[1] - b[1];
+      });
+      let list = stabilizedThis.map((el) => el[0]);
+      for (const arrayElement of list) {
+        arrayElement.children = stableSort(arrayElement.children, comparator);
+      }
+      return list;
+    }
+    return [];
   }
 
   return (
@@ -134,7 +151,7 @@ export default function TreeGrid(props) {
         <TableHead>
           <TableRow>{columnssState}</TableRow>
         </TableHead>
-        <TableBody>{rowsState}</TableBody>
+        <TableBody key={Math.random()}>{rowsState}</TableBody>
       </Table>
     </TableContainer>
   );
