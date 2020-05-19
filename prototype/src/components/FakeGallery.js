@@ -9,7 +9,7 @@ const ItemComponent = (props) => {
     <div
       style={{
         userSelect: "none",
-        border: "1px solid black",
+        border: "1px solid transparent",
         fontFamily: "sans-serif",
         background: "transparent",
         ...styles,
@@ -27,6 +27,8 @@ const ItemComponent = (props) => {
       </div>
       <div
         style={{
+          color: "white",
+          fontFamily: "",
           cursor: "pointer",
           boxSizing: "border-box",
           width: "198px",
@@ -34,8 +36,8 @@ const ItemComponent = (props) => {
           boxShadow: "none",
           borderWidth: "1px 0 0 0",
           borderStyle: "solid",
-          borderColor: "black",
-          background: "#ccc",
+          borderColor: "rgb(0, 176, 188)",
+          background: "rgb(0, 176, 188)",
           fontSize: 18,
           paddingTop: "6px",
           textAlign: "center",
