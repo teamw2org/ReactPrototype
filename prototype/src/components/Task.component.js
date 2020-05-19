@@ -1,40 +1,64 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TreeGrid from "./TreeGrid/TreeGrid";
+import base64 from "react-native-base64";
 
 export default function Task() {
-  function createData(name, calories, fat, carbs, protein, price) {
-    const elementsList = [];
-
-    return {
-      name,
-      calories,
-      fat,
-      carbs,
-      protein,
-      price,
-      children: elementsList,
-    };
+  function setChildren(data, row) {
+    if (row) {
+      let copiedState = [...rowsState];
+      row.children = data;
+      setRowsState(copiedState);
+    } else {
+      setRowsState(data);
+    }
   }
 
-  const [rowsState, setState] = useState([
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0, 3.99),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3, 4.99),
-    createData("Eclair", 262, 16.0, 24, 6.0, 3.79),
-    createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
-    createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
-  ]);
+  const [rowsState, setRowsState] = useState([]);
+
+  useEffect(() => {
+    loadData("", "", null);
+  }, []);
 
   const handleExpandChange = (e) => {
     if (!e.row.children || e.row.children.length == 0) {
-      let rowsState1 = [...rowsState];
-      const children = [
-        createData("aaaaaa" + Math.random(), 159, 6.0, 24, 4.0, 3.99),
-      ];
-      e.row.children = children;
-
-      setState(rowsState1);
+      loadData(e.row.entityBucketId, e.row.identifier, e.row);
     }
   };
+
+  function loadData(parentEntity, parentIdentifier, row) {
+    let headers = new Headers();
+    headers.set(
+      "Authorization",
+      "Basic " + base64.encode("gnadmin:werk2admin")
+    );
+    headers.append("Access-Control-Allow-Origin", "*");
+    headers.append("Access-Control-Allow-Credentials", "true");
+    headers.append("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+    headers.append("Access-Control-Allow-Headers", "Content-Type, Accept");
+
+    fetch(
+      "http://localhost:40080/PlannerRESTService/aio/EN/v1/publications/buckets?sessionid=alamakota&parentEntityIdentifier=" +
+        parentEntity +
+        "&parentIdentifier=" +
+        parentIdentifier,
+      {
+        method: "GET",
+        headers: headers,
+      }
+    )
+      .then((response) => response.json())
+      .then((json) => {
+        const dataForTree = json.map((el) => {
+          return {
+            label: el.label,
+            identifier: el.identifier,
+            entityBucketId: el.entityBucketId,
+            children: [],
+          };
+        });
+        setChildren(dataForTree, row);
+      });
+  }
 
   return (
     <TreeGrid
@@ -42,47 +66,23 @@ export default function Task() {
       columns={[
         {
           width: 200,
-          label: "Dessert (100g serving)",
-          dataKey: "name",
+          label: "Label",
+          dataKey: "label",
           visible: true,
         },
         {
           width: 100,
-          label: "Calories",
-          dataKey: "calories",
+          label: "Identifier",
+          dataKey: "identifier",
           numeric: false,
           visible: true,
           align: "right",
         },
         {
           width: 100,
-          label: "Fat (g)",
-          dataKey: "fat",
+          label: "Entity Identifier",
+          dataKey: "entityBucketId",
           numeric: false,
-          visible: true,
-          align: "right",
-        },
-        {
-          width: 100,
-          label: "Carbs (g)",
-          dataKey: "carbs",
-          numeric: false,
-          visible: true,
-          align: "right",
-        },
-        {
-          width: 100,
-          label: "Protein (g)",
-          dataKey: "protein",
-          numeric: false,
-          visible: true,
-          align: "right",
-        },
-        {
-          width: 100,
-          label: "Price",
-          dataKey: "price",
-          numeric: true,
           visible: true,
           align: "right",
         },
