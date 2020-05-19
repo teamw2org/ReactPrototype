@@ -23,7 +23,7 @@ export default function TreeRow(props) {
 
   useEffect(() => {
     setColumnsState(createTableCells());
-  }, [columns]);
+  }, [columns, row.expanded]);
 
   const createTableCells = () => {
     let firstElement = true;
