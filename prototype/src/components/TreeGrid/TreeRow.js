@@ -5,69 +5,84 @@ import IconButton from "@material-ui/core/IconButton";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 
-export default function TreeRow(props){
+export default function TreeRow(props) {
+  const useRowStyles = makeStyles({
+    root: {
+      "& > *": {
+        borderBottom: "unset",
+      },
+    },
+  });
 
-    const useRowStyles = makeStyles({
-        root: {
-            "& > *": {
-                borderBottom: "unset"
-            }
-        }
-    });
+  const { row, cells, onExpand, depth } = props;
+  const [open, setOpen] = React.useState(row.expanded);
+  const classes = useRowStyles();
 
-    const { row, cells, onExpand, depth} = props;
-    const [open, setOpen] = React.useState(row.expanded);
-    const classes = useRowStyles();
-
-    const createTableCells = () =>{
-        for (const element of cells) {
-
-        }
+  const createTableCells = () => {
+    for (const element of cells) {
     }
+  };
 
-    return (
-        <React.Fragment>
-            <TableRow className={classes.root}>
-                <TableCell style={{ paddingLeft:depth+'px', paddingRight:'-'+depth+'px'}} component="th" scope="row">
-                    <IconButton
-                        aria-label="expand row"
-                        size="small"
-                        onClick={
-                            () => {
-                                setOpen(!open);
-                                onExpand({row: row, isExpanded: !open});
-                            }
-                        }
-                    >
-                        {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
-                    </IconButton>
-                    {row.name}</TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
-                <TableCell align="right">{row.price}</TableCell>
-            </TableRow>
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <TableRow>
+        <TableCell
+          style={{
+            paddingLeft: depth + "px",
+            paddingRight: "0px",
+            width: "100px !important",
+          }}
+          component="th"
+          scope="row"
+        >
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => {
+              setOpen(!open);
+              onExpand({ row: row, isExpanded: !open });
+            }}
+          >
+            {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
+          </IconButton>
+          {row.name}
+        </TableCell>
+        <TableCell align="right" style={{ width: 160 }}>
+          {row.calories}
+        </TableCell>
+        <TableCell align="right" style={{ width: 160 }}>
+          {row.fat}
+        </TableCell>
+        <TableCell align="right" style={{ width: 160 }}>
+          {row.carbs}
+        </TableCell>
+        <TableCell align="right" style={{ width: 160 }}>
+          {row.protein}
+        </TableCell>
+        <TableCell align="right" style={{ width: 160 }}>
+          {row.price}
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
+  );
 }
 
 TreeRow.propTypes = {
-    row: PropTypes.shape({
-        calories: PropTypes.number.isRequired,
-        carbs: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        history: PropTypes.arrayOf(
-            PropTypes.shape({
-                amount: PropTypes.number.isRequired,
-                customerId: PropTypes.string.isRequired,
-                date: PropTypes.string.isRequired
-            })
-        ).isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        protein: PropTypes.number.isRequired
-    }).isRequired
+  row: PropTypes.shape({
+    calories: PropTypes.number.isRequired,
+    carbs: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    history: PropTypes.arrayOf(
+      PropTypes.shape({
+        amount: PropTypes.number.isRequired,
+        customerId: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    protein: PropTypes.number.isRequired,
+  }).isRequired,
 };
