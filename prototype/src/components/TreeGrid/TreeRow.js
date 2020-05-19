@@ -62,9 +62,9 @@ export default function TreeRow(props) {
           }}
         >
           {row.expanded ? (
-            <KeyboardArrowDownIcon />
+            <KeyboardArrowDownIcon style={{ color: "00676C" }} />
           ) : (
-            <KeyboardArrowRightIcon />
+            <KeyboardArrowRightIcon style={{ color: "00676C" }} />
           )}
         </IconButton>
         {row[name]}

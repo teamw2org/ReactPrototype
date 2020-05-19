@@ -7,6 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TreeRow from "./TreeRow";
 import TreeCell from "./TreeCell";
+import "./TreeGrid.style.css";
 
 export default function TreeGrid(props) {
   const [rowsState, setRows] = React.useState([]);

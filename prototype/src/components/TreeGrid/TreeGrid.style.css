@@ -1,0 +1,41 @@
+tbody .MuiTableRow-root:hover{
+    background-color: rgba(0, 176, 188, 0.34);
+    color: white;
+    cursor: grab;
+}
+
+.MuiTableContainer-root{
+    overflow: auto;
+    height: 100%;
+}
+
+.MuiTableRow-hover:hover{
+    background-color: rgba(0, 176, 188, 0.34) !important;
+    color: #00676C !important;
+}
+
+.MuiTableCell-head{
+    background-color: rgb(0, 176, 188);
+}
+
+th span.MuiButtonBase-root{
+    color: white !important;
+}
+.MuiTableSortLabel-icon{
+    color: white !important;
+}
+
+.MuiTableCell-body:hover{
+    color: #00676C;
+}
+
+.MuiTableRow-root th{
+    color: #00676C;
+}
+
+.MuiTableRow-root td{
+    color: #00676C;
+}
+.ReactVirtualized__Table__headerColumn span{
+    color: white;
+}
