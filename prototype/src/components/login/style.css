@@ -1,0 +1,169 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family:'Roboto', sans-serif;;
+}
+
+.mainFlexContainer {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.left {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    width: 25%;
+    min-width: 400px;
+}
+
+.right {
+    height: 100vh;
+    width: 75%;
+    background-image: url('resources/bg.jpg');
+    background-size: cover;
+}
+
+.logo {
+    align-self: flex-start;
+    height: 80px;
+    width: 80px;
+}
+
+.logo:hover {
+    cursor: pointer;
+}
+
+.logo img {
+    height: 80px;
+    width: 80px;
+}
+
+.inputFields {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    align-items: center;
+}
+
+.inputFields input {
+    margin: 0px 0 20px 0;
+    height: 30px;
+    width: 100%;
+    padding: 3px;
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+.inputFields input:focus {
+    outline-width: 0px;
+}
+
+.inputFields button {
+    margin: 10px 0 10px 0;
+    border-width: 0;
+    border-radius: 5px;
+    background-color: #00b0bc;
+    color: white;
+}
+
+.inputFields button:focus {
+    outline-width: 0px;
+}
+
+.inputFields button:hover {
+    background-color: #008f99;
+    cursor: pointer;
+}
+
+#iconEye {
+    align-self: flex-end;
+    z-index: 100;
+    margin-bottom: -30px;
+    margin-right: 5px;
+}
+
+#iconEye:hover {
+    cursor: pointer;
+}
+
+#loginButton {
+    width: 100%;
+    height: 30px;
+}
+
+#advancedButton {
+    margin-bottom: 10px;
+    padding: 5px;
+    align-self: flex-end;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
+#advancedButton img {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(12deg) brightness(105%) contrast(102%);
+    width: 20px;
+    height: 20px;
+    vertical-align: baseline !important;
+}
+
+#advancedSection {
+    height: 150px;
+}
+
+.footer {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.version {
+    font-size: 14px;
+}
+
+#languages {
+    height: 30px;
+    width: 150px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#languages:focus {
+    outline-width: 0px;
+}
+
+#languages:hover {
+    cursor: pointer;
+}
+
+#trace {
+    width: 20px;
+    align-self: flex-start;
+    justify-self: flex-start;
+}
+
+#trace input {
+    width: 100%;
+}
+
+#trace:hover {
+    cursor: pointer;
+}
+
+.inputFields label {
+    align-self: flex-start;
+    font-size: 14px;
+}
+
+.settingsIcon{
+    vertical-align: baseline;
+}
