@@ -14,6 +14,11 @@ const useStyles = makeStyles({
     backgroundColor: blue[100],
     color: blue[600],
   },
+  span: {
+    color: "rgb(2,146,156)",
+    fontWeight: "bold",
+    marginRight: "5px",
+  },
 });
 
 export default function SimpleDialog(props) {
@@ -56,13 +61,21 @@ export default function SimpleDialog(props) {
                 justifyContent: "center",
               }}
             >
-              <ListItem key={Math.random()}>Name: {data.name}</ListItem>
               <ListItem key={Math.random()}>
-                Last name: {data.lastname}
+                <span className={classes.span}>Name:</span> {data.name}
               </ListItem>
-              <ListItem key={Math.random()}>Username: {data.username}</ListItem>
-              <ListItem key={Math.random()}>Retweet: {data.retweet}</ListItem>
-              <ListItem key={Math.random()}>Likes: {data.likes}</ListItem>
+              <ListItem key={Math.random()}>
+                <span className={classes.span}>Last name:</span> {data.lastname}
+              </ListItem>
+              <ListItem key={Math.random()}>
+                <span className={classes.span}>Username:</span> {data.username}
+              </ListItem>
+              <ListItem key={Math.random()}>
+                <span className={classes.span}>Retweet:</span> {data.retweet}
+              </ListItem>
+              <ListItem key={Math.random()}>
+                <span className={classes.span}>Likes:</span> {data.likes}
+              </ListItem>
             </div>
           </List>
         </div>
