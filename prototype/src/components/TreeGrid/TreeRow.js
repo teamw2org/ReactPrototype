@@ -77,10 +77,10 @@ export default function TreeRow(props) {
       isDragging: monitor.isDragging(),
     }),
     end: (dropResult, monitor) => {
-      const { id: id, row: row, index } = monitor.getItem();
+      const { id: id, row: rowHovered, index } = monitor.getItem();
       const didDrop = monitor.didDrop();
       if (didDrop) {
-        moveCard(id, row, index);
+        moveCard(id, rowHovered, row, index);
       }
     },
   });

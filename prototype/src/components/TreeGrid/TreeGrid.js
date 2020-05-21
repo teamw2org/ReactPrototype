@@ -5,7 +5,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import update from "immutability-helper";
 import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
 import TreeRow from "./TreeRow";
@@ -97,8 +96,7 @@ export default function TreeGrid(props) {
     for (const element of elementsRows) {
       rowElementsList.push(
         <TreeRow
-          key={Math.random()}
-          key={element.name}
+          key={element.identifier}
           depth={depth}
           columns={columns}
           onExpand={(e) => {
@@ -151,35 +149,32 @@ export default function TreeGrid(props) {
     return [];
   }
 
-  const findRowArray = (id, array, arrayTMP) => {
+  const findRowArray = (id, array) => {
+    let resultArray = [];
     for (const element of array) {
-      if (id === element.id) {
-        arrayTMP = array;
-        break;
+      if (id === element.identifier) {
+        return array;
       } else {
-        findRowArray(id, element.children);
+        const arrayTMP = findRowArray(id, element.children);
+        if (arrayTMP.length !== 0) {
+          resultArray = arrayTMP;
+        }
       }
     }
+    return resultArray;
   };
 
   const moveCard = useCallback(
-    (dragId, rowToMoveDown, hoverIndex) => {
-      const newIndex = hoverIndex === 0 ? 0 : hoverIndex - 1;
+    (dragId, rowToMoveDown, movedRow, hoverIndex) => {
       let ss = [...refRowsState.current];
-      let draggedArray = [];
-      findRowArray(dragId, ss, draggedArray);
+      let pizda = [];
+      let draggedArray = findRowArray(movedRow.identifier, ss);
       let row;
       if (draggedArray.includes(rowToMoveDown)) {
-        for (const element of draggedArray) {
-          if (element.id === dragId) {
-            row = element;
-            break;
-          }
-        }
-
-        const index = draggedArray.indexOf(row);
+        const index = draggedArray.indexOf(movedRow);
+        const newIndex = draggedArray.indexOf(rowToMoveDown);
         draggedArray.splice(index, 1);
-        draggedArray.splice(newIndex, 0, row);
+        draggedArray.splice(newIndex, 0, movedRow);
       }
 
       onSortRows(ss);
