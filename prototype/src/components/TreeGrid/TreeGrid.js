@@ -97,7 +97,6 @@ export default function TreeGrid(props) {
     for (const element of elementsRows) {
       rowElementsList.push(
         <TreeRow
-          key={Math.random()}
           key={element.name}
           depth={depth}
           columns={columns}
