@@ -30,6 +30,7 @@ export default function TreeRow(props) {
       if (!ref.current) {
         return;
       }
+      item.row = row;
       const dragIndex = item.index;
       const hoverIndex = index;
       // Don't replace items with themselves
