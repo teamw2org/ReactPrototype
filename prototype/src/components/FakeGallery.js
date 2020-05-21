@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import VirtualDraggableGrid from "react-virtual-draggable-grid";
+import SimpleDialog from "./Modal/Modal.component";
 
 const ItemComponent = (props) => {
-  const { rowTMP, imgNr, styles } = props;
+  const { rowTMP, imgNr, styles, handleClick } = props;
 
   return (
     <div
@@ -42,11 +43,7 @@ const ItemComponent = (props) => {
           paddingTop: "6px",
           textAlign: "center",
         }}
-        onClick={() =>
-          alert(
-            `Name: ${rowTMP.name}, Last name: ${rowTMP.lastname}, Username: ${rowTMP.username}, Retweet: ${rowTMP.retweet}, Likes: ${rowTMP.likes}`
-          )
-        }
+        onClick={() => handleClick(rowTMP)}
       >
         {`${rowTMP.name}`}
       </div>
@@ -72,6 +69,25 @@ export default class Grid extends React.Component {
     function createData(id, name, lastname, username, retweet, likes) {
       return { id, name, lastname, username, retweet, likes };
     }
+
+    this.state = {
+      open: false,
+      item: {},
+    };
+
+    const handleClickOpen = () => {
+      this.setState({ open: true });
+    };
+
+    const handleClose = () => {
+      this.setState({ open: false });
+    };
+
+    this.handleClose = handleClose.bind(this);
+
+    const handleClick = (item) => {
+      this.setState({ item: item, open: true });
+    };
 
     function prepareData() {
       let preparedData = [];
@@ -260,12 +276,13 @@ export default class Grid extends React.Component {
         if (imgArray.includes(imgNumber)) {
           imgNumber = 1;
         }
-
+        rowTMP.imgNr = imgNumber;
         newItem.key = key;
         newItem.itemProps = {
           ...item.itemProps,
           name: "-" + increment,
           imgNr: imgNumber,
+          handleClick: handleClick,
           rowTMP: rowTMP,
         };
         newItem.fixedWidth = item.fixedWidth;
@@ -296,6 +313,11 @@ export default class Grid extends React.Component {
           scrollBufferX={400}
           scrollBufferY={400}
           getItems={this.getItems}
+        />
+        <SimpleDialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          data={this.state.item}
         />
       </div>
     );

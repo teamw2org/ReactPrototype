@@ -25,6 +25,7 @@ import TreeGrid from "../components/TreeGrid.component";
 import Users from "../components/Users.component";
 import Task from "../components/Task.component";
 import FlatPlanning from "../components/flatPlanning/FlatPlanning.component";
+import LoginPanel from "../components/login/Login.component";
 
 function Copyright() {
   return (
@@ -133,6 +134,7 @@ export default function Dashboard() {
   let documentsGrid = null;
   let usersLayout = null;
   let flatPlanning = null;
+  let login = null;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [currentLayoutState, setCurrentLayoutState] = React.useState(
@@ -168,6 +170,11 @@ export default function Dashboard() {
         flatPlanning = <FlatPlanning />;
       }
       setCurrentLayoutState(flatPlanning);
+    } else if ("login" === layoutId) {
+      if (login == null) {
+        login = <LoginPanel />;
+      }
+      setCurrentLayoutState(login);
     } else {
       setCurrentLayoutState(<Task />);
     }
