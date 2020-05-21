@@ -9,7 +9,20 @@ export default function Task() {
       row.children = data;
       setRowsState(copiedState);
     } else {
-      setRowsState(data);
+      let copiedState = [...data];
+      let i = {
+        label: "label",
+        identifier: "identifier",
+        entityBucketId: "entityBucketId",
+      };
+      copiedState.push(i);
+      i = {
+        label: "label1",
+        identifier: "identifier1",
+        entityBucketId: "entityBucketId1",
+      };
+      copiedState.push(i);
+      setRowsState(copiedState);
     }
   }
 
@@ -31,6 +44,10 @@ export default function Task() {
   const handleSortChange = () => {
     let rowsState1 = [...rowsState];
     setRowsState(rowsState1);
+  };
+
+  const handleSortRowsChange = (list) => {
+    setRowsState(list);
   };
 
   function loadData(parentEntity, parentIdentifier, row) {
@@ -96,6 +113,7 @@ export default function Task() {
       ]}
       onExpand={handleExpandChange}
       onSort={handleSortChange}
+      onSortRows={handleSortRowsChange}
     />
   );
 }

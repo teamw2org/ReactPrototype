@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import update from "immutability-helper";
+import { DndProvider } from "react-dnd";
+import Backend from "react-dnd-html5-backend";
 import TreeRow from "./TreeRow";
 import TreeCell from "./TreeCell";
 import "./TreeGrid.style.css";
@@ -14,7 +17,7 @@ export default function TreeGrid(props) {
   const [columnssState, setColumns] = React.useState([]);
   const [bodyKey, setBodyKey] = React.useState(Math.random());
 
-  const { rows, columns, onExpand, onSort } = props;
+  const { rows, columns, onExpand, onSort, onSortRows } = props;
   const [orders, setOrder] = React.useState({
     order: "asc",
     orderBy: "calories",
@@ -24,6 +27,11 @@ export default function TreeGrid(props) {
   const refValue = useRef(orders);
   useEffect(() => {
     refValue.current = orders;
+  });
+
+  const refRowsState = useRef(rows);
+  useEffect(() => {
+    refRowsState.current = rows;
   });
 
   const handleRequestSort = React.useCallback((event, property) => {
@@ -84,7 +92,7 @@ export default function TreeGrid(props) {
     }
     return cellElementsList;
   };
-
+  let rowId = 0;
   const createRowElements = (rowElementsList, elementsRows, depth) => {
     for (const element of elementsRows) {
       rowElementsList.push(
@@ -96,9 +104,13 @@ export default function TreeGrid(props) {
           onExpand={(e) => {
             thisExpandedEvent(e);
           }}
+          id={rowId + 1}
+          index={rowId}
+          moveCard={moveCard}
           row={element}
         />
       );
+      rowId += 1;
       if (element.children && (element.expanded === null || element.expanded)) {
         createRowElements(rowElementsList, element.children, depth + 15);
       }
@@ -139,13 +151,51 @@ export default function TreeGrid(props) {
     return [];
   }
 
+  const findRowArray = (id, array, arrayTMP) => {
+    for (const element of array) {
+      if (id === element.id) {
+        arrayTMP = array;
+        break;
+      } else {
+        findRowArray(id, element.children);
+      }
+    }
+  };
+
+  const moveCard = useCallback(
+    (dragId, rowToMoveDown, hoverIndex) => {
+      const newIndex = hoverIndex === 0 ? 0 : hoverIndex - 1;
+      let ss = [...refRowsState.current];
+      let draggedArray = [];
+      findRowArray(dragId, ss, draggedArray);
+      let row;
+      if (draggedArray.includes(rowToMoveDown)) {
+        for (const element of draggedArray) {
+          if (element.id === dragId) {
+            row = element;
+            break;
+          }
+        }
+
+        const index = draggedArray.indexOf(row);
+        draggedArray.splice(index, 1);
+        draggedArray.splice(newIndex, 0, row);
+      }
+
+      onSortRows(ss);
+    },
+    [rowsState]
+  );
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="custom pagination table">
         <TableHead>
           <TableRow>{columnssState}</TableRow>
         </TableHead>
-        <TableBody>{rowsState}</TableBody>
+        <DndProvider backend={Backend}>
+          <TableBody>{rowsState}</TableBody>
+        </DndProvider>
       </Table>
     </TableContainer>
   );
