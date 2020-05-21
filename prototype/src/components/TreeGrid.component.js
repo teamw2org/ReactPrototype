@@ -1,6 +1,7 @@
 import "primereact/resources/themes/nova-light/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import { MultiSelect } from "primereact/multiselect";
 import "../index.css";
 
 import React, { useEffect, useState } from "react";
@@ -14,6 +15,24 @@ const TreeGrid = (props) => {
   const sizeInPercentage = !props.sizeInPercentage
     ? "100%"
     : props.sizeInPercentage;
+
+  let columns = [
+    { field: "identifier", header: "Identifier", sortable: true },
+    { field: "type", header: "Type", sortable: true },
+  ];
+
+  let colOptions = [];
+  for (let col of columns) {
+    colOptions.push({ label: col.header, value: col });
+  }
+
+  const [columnsState, setColumnsState] = useState({
+    columns: columns,
+    colOptions: colOptions,
+  });
+  const onColumnToggle = (event) => {
+    setColumnsState({ columns: event.value, colOptions: colOptions });
+  };
 
   useEffect(() => {
     loadData("", "");
@@ -125,10 +144,25 @@ const TreeGrid = (props) => {
         });
     }
   }
+  const columnsUi = columnsState.columns.map((col, i) => {
+    return <Column key={col.field} field={col.field} header={col.header} />;
+  });
+
+  const header = (
+    <div style={{ textAlign: "left" }}>
+      <MultiSelect
+        value={columnsState.columns}
+        options={columnsState.colOptions}
+        onChange={onColumnToggle}
+        style={{ width: "250px" }}
+      />
+    </div>
+  );
 
   return (
     <div style={{ height: sizeInPercentage }}>
       <TreeTable
+        header={header}
         style={{ height: "100%", padding: "2px 5px 2px 5px" }}
         tableStyle={{ height: "100%" }}
         scrollHeight="400px"
@@ -152,8 +186,7 @@ const TreeGrid = (props) => {
           sortable
           reorderable={true}
         ></Column>
-        <Column field="identifier" header="Identifier" sortable></Column>
-        <Column field="type" header="Type" sortable></Column>
+        {columnsUi}
       </TreeTable>
     </div>
   );

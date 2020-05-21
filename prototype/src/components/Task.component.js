@@ -9,20 +9,7 @@ export default function Task() {
       row.children = data;
       setRowsState(copiedState);
     } else {
-      let copiedState = [...data];
-      let i = {
-        label: "label",
-        identifier: "identifier",
-        entityBucketId: "entityBucketId",
-      };
-      copiedState.push(i);
-      i = {
-        label: "label1",
-        identifier: "identifier1",
-        entityBucketId: "entityBucketId1",
-      };
-      copiedState.push(i);
-      setRowsState(copiedState);
+      setRowsState(data);
     }
   }
 
