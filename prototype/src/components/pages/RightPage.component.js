@@ -10,10 +10,10 @@ const RightPage = (props) => {
 
   const getItems = () => {
     return Math.random() < 0.4
-      ? getVirtualGridElement1(0)
+      ? getVirtualGridElement1(210)
       : Math.random() < 0.5
-      ? getVirtualGridElement2(0)
-      : getVirtualGridElement3(0);
+      ? getVirtualGridElement2(210)
+      : getVirtualGridElement3(210);
   };
   const [items, setStateItems] = React.useState([getItems()]);
 
