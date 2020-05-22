@@ -37,11 +37,18 @@ export default class Page extends React.Component {
   render() {
     return (
       <div id="mainContent">
-        <Typography
-          component="div"
-          style={{ width: "200px", marginLeft: "14px" }}
-        >
-          <Grid component="label" container alignItems="center" spacing={1}>
+        <Typography component="div" style={{ marginLeft: "14px" }}>
+          <Grid
+            component="label"
+            container
+            alignItems="center"
+            spacing={1}
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              width: "100%",
+            }}
+          >
             <Grid item>Basic</Grid>
             <Grid item>
               <FormControlLabel
