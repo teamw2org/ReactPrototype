@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   getVirtualGridElement1,
   getVirtualGridElement2,
@@ -6,10 +6,12 @@ import {
 } from "../utils/Utils";
 
 const RightPage = (props) => {
-  const { width, height, title } = props;
+  const { width, height, title, checkState } = props;
+
+  useEffect(() => {}, [checkState]);
 
   const getItems = () => {
-    return Math.random() < 0.4
+    return Math.random() < 0.3
       ? getVirtualGridElement1(210)
       : Math.random() < 0.5
       ? getVirtualGridElement2(210)

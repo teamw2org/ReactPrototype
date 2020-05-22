@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../flatPlanning/FlatPlanning.style.css";
 import {
   getVirtualGridElement1,
@@ -6,10 +6,16 @@ import {
   getVirtualGridElement3,
 } from "../utils/Utils";
 const LeftPage = (props) => {
-  const { width, height, title } = props;
+  const { width, height, title, checkState } = props;
+
+  useEffect(() => {
+    if (checkState) {
+      console.log("dupa1");
+    }
+  }, [checkState]);
 
   const getItems = () => {
-    return Math.random() < 0.4
+    return Math.random() < 0.3
       ? getVirtualGridElement1(0)
       : Math.random() < 0.5
       ? getVirtualGridElement2(0)

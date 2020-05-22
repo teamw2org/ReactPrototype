@@ -23,7 +23,7 @@ import LeftPage from "./LeftPage.component";
 import RightPage from "./RightPage.component";
 
 // App.
-const App = () => {
+const App = (props) => {
   // Items state.
   const [items, setItems] = useState(generateItems());
 
@@ -46,6 +46,7 @@ const App = () => {
     <Item
       style={{ height: height, width: width, borderColor: "black" }}
       key={id}
+      checkState={props.checkState}
       publication={publication}
       title={title}
       width={width}
@@ -89,14 +90,32 @@ const App = () => {
 };
 
 // Item component.
-const Item = ({ color, width, height, title, remove, publication }) => {
+const Item = ({
+  color,
+  width,
+  height,
+  title,
+  remove,
+  publication,
+  checkState,
+}) => {
   return (
     <div className={`item`} style={{ height: height, width: width }}>
       <div className="item-content">
         <div className="card" style={{ display: "flex" }}>
-          <LeftPage width="210px" height="100%" title={title} />
+          <LeftPage
+            width="210px"
+            height="100%"
+            checkState={checkState}
+            title={title}
+          />
           {width !== "210px" ? (
-            <RightPage width="210px" height="100%" title={title} />
+            <RightPage
+              width="210px"
+              height="100%"
+              checkState={checkState}
+              title={title}
+            />
           ) : null}
         </div>
       </div>

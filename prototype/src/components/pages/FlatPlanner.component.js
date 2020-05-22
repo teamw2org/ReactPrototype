@@ -64,7 +64,7 @@ export default class Page extends React.Component {
             </Grid>
           </Grid>
         </Typography>
-        <MuuriComponent />
+        <MuuriComponent checkState={this.state.checked} />
       </div>
     );
   }

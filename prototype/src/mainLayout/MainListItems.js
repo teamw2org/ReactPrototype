@@ -6,6 +6,7 @@ import StorageIcon from "@material-ui/icons/Storage";
 import FolderSpecialIcon from "@material-ui/icons/FolderSpecial";
 import BorderClearIcon from "@material-ui/icons/BorderClear";
 import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
+import MuseumIcon from "@material-ui/icons/Museum";
 
 export default function mainListItems(props) {
   return (
@@ -36,7 +37,7 @@ export default function mainListItems(props) {
       </ListItem>
       <ListItem button onClick={props.changeLayout.bind(null, "muri")}>
         <ListItemIcon>
-          <SupervisedUserCircleIcon />
+          <MuseumIcon />
         </ListItemIcon>
         <ListItemText primary="muri" />
       </ListItem>
