@@ -18,9 +18,8 @@ export default function TreeGrid(props) {
   const { rows, columns, onExpand, onSort, onSortRows } = props;
   const [orders, setOrder] = React.useState({
     order: "asc",
-    orderBy: "calories",
+    orderBy: "",
   });
-  // const [orderBy, setOrderBy] = React.useState("calories");
 
   const refValue = useRef(orders);
   useEffect(() => {
@@ -165,18 +164,16 @@ export default function TreeGrid(props) {
 
   const moveCard = useCallback(
     (dragId, rowToMoveDown, movedRow, hoverIndex) => {
-      let ss = [...refRowsState.current];
-      let pizda = [];
-      let draggedArray = findRowArray(movedRow.identifier, ss);
-      let row;
+      let currentRowsState = [...refRowsState.current];
+      let draggedArray = findRowArray(movedRow.identifier, currentRowsState);
       if (draggedArray.includes(rowToMoveDown)) {
         const index = draggedArray.indexOf(movedRow);
         const newIndex = draggedArray.indexOf(rowToMoveDown);
         draggedArray.splice(index, 1);
         draggedArray.splice(newIndex, 0, movedRow);
+        setOrder({ order: "asc", orderBy: "" });
       }
-
-      onSortRows(ss);
+      onSortRows(currentRowsState);
     },
     [rowsState]
   );
