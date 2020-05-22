@@ -1,14 +1,13 @@
 import React from "react";
 
 const RightPage = (props) => {
-  const { width, height } = props;
+  const { width, height, title } = props;
   return (
     <div
       style={{
         userSelect: "none",
-        border: "1px solid black",
         fontFamily: "sans-serif",
-
+        borderLeft: "1px solid black",
         width: width,
         height: height,
       }}
@@ -32,7 +31,7 @@ const RightPage = (props) => {
           fontSize: 18,
         }}
       >
-        {`Right`}
+        {title}
       </p>
     </div>
   );

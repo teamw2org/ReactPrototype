@@ -34,6 +34,12 @@ export default function mainListItems(props) {
         </ListItemIcon>
         <ListItemText primary="Login" />
       </ListItem>
+      <ListItem button onClick={props.changeLayout.bind(null, "muri")}>
+        <ListItemIcon>
+          <SupervisedUserCircleIcon />
+        </ListItemIcon>
+        <ListItemText primary="muri" />
+      </ListItem>
     </div>
   );
 }

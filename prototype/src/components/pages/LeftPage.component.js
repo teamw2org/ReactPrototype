@@ -1,13 +1,12 @@
 import React from "react";
 import "../flatPlanning/FlatPlanning.style.css";
 const LeftPage = (props) => {
-  const { width, height } = props;
+  const { width, height, title } = props;
 
   return (
     <div
       style={{
         userSelect: "none",
-        border: "1px solid black",
         fontFamily: "sans-serif",
 
         width: width,
@@ -32,7 +31,9 @@ const LeftPage = (props) => {
           margin: 0,
           fontSize: 18,
         }}
-      >{`Left`}</p>
+      >
+        {title}
+      </p>
     </div>
   );
 };

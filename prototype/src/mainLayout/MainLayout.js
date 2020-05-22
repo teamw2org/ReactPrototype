@@ -26,6 +26,7 @@ import Users from "../components/Users.component";
 import Task from "../components/Task.component";
 import FlatPlanning from "../components/flatPlanning/FlatPlanning.component";
 import LoginPanel from "../components/login/Login.component";
+import Muri from "../components/pages/Muuri.component";
 
 function Copyright() {
   return (
@@ -175,6 +176,8 @@ export default function Dashboard() {
         login = <LoginPanel />;
       }
       setCurrentLayoutState(login);
+    } else if ("muri" === layoutId) {
+      setCurrentLayoutState(<Muri />);
     } else {
       setCurrentLayoutState(<Task />);
     }
