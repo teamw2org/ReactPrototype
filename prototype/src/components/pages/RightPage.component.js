@@ -7,6 +7,16 @@ import {
 
 const RightPage = (props) => {
   const { width, height, title } = props;
+
+  const getItems = () => {
+    return Math.random() < 0.4
+      ? getVirtualGridElement1(0)
+      : Math.random() < 0.5
+      ? getVirtualGridElement2(0)
+      : getVirtualGridElement3(0);
+  };
+  const [items, setStateItems] = React.useState([getItems()]);
+
   return (
     <div
       style={{
@@ -38,11 +48,7 @@ const RightPage = (props) => {
       >
         {title}
       </p>
-      {Math.random() < 0.3
-        ? getVirtualGridElement1(210)
-        : Math.random() < 0.5
-        ? getVirtualGridElement2(210)
-        : getVirtualGridElement3(210)}
+      {items}
     </div>
   );
 };
