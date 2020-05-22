@@ -1,7 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 import VirtualDraggableGrid from "react-virtual-draggable-grid";
+import "./FlatPlanner.style.css";
 import ItemComponent from "./Document.component";
 
 export default class Page extends React.Component {
@@ -9,8 +8,8 @@ export default class Page extends React.Component {
     super(props);
 
     const pagesCount = 100;
-    const x = 5;
-    const y = 20;
+    const x = 2;
+    const y = 50;
     const items = [];
 
     for (let iY = 0; iY < y; iY += 1) {

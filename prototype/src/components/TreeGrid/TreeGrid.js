@@ -5,8 +5,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { DndProvider } from "react-dnd";
-import Backend from "react-dnd-html5-backend";
+import DragAndDrop from "../utils/DragAndDrop";
 import TreeRow from "./TreeRow";
 import TreeCell from "./TreeCell";
 import "./TreeGrid.style.css";
@@ -188,9 +187,9 @@ export default function TreeGrid(props) {
         <TableHead>
           <TableRow>{columnssState}</TableRow>
         </TableHead>
-        <DndProvider backend={Backend}>
+        <DragAndDrop>
           <TableBody>{rowsState}</TableBody>
-        </DndProvider>
+        </DragAndDrop>
       </Table>
     </TableContainer>
   );

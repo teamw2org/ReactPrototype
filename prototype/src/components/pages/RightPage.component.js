@@ -13,6 +13,16 @@ const RightPage = (props) => {
         height: height,
       }}
     >
+      <div
+        style={{
+          clipPath: "polygon(100% 0, 0 0, 100% 100%)",
+          width: "20px",
+          height: "20px",
+          backgroundColor: "black",
+          position: "absolute",
+          right: "0",
+        }}
+      ></div>
       <p
         style={{
           display: "flex",
@@ -22,7 +32,7 @@ const RightPage = (props) => {
           fontSize: 18,
         }}
       >
-        {`Right!`}
+        {`Right`}
       </p>
     </div>
   );

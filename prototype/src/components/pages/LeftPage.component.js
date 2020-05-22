@@ -14,7 +14,25 @@ const LeftPage = (props) => {
         height: height,
       }}
     >
-      <p>{`Left!`}</p>
+      <div
+        style={{
+          clipPath: "polygon(0 0, 0 100%, 100% 0)",
+          width: "20px",
+          height: "20px",
+          backgroundColor: "black",
+          position: "absolute",
+          left: "0",
+        }}
+      ></div>
+      <p
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: 0,
+          fontSize: 18,
+        }}
+      >{`Left`}</p>
     </div>
   );
 };
