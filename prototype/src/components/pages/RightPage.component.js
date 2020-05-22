@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  getVirtualGridElement1,
+  getVirtualGridElement2,
+  getVirtualGridElement3,
+} from "../utils/Utils";
 
 const RightPage = (props) => {
   const { width, height, title } = props;
@@ -33,6 +38,11 @@ const RightPage = (props) => {
       >
         {title}
       </p>
+      {Math.random() < 0.3
+        ? getVirtualGridElement1(210)
+        : Math.random() < 0.5
+        ? getVirtualGridElement2(210)
+        : getVirtualGridElement3(210)}
     </div>
   );
 };

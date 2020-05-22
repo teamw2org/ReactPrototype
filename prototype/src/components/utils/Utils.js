@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 // a little function to help us with reordering the result
 export const Reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -78,6 +78,83 @@ export function generateItems() {
   }
 
   return items;
+}
+
+export function getVirtualGridElement1(possition) {
+  return (
+    <>
+      <div
+        style={{
+          backgroundColor: "#00cec9",
+          position: "absolute",
+          width: "80px",
+          height: "150px",
+          left: possition + 15 + "px",
+        }}
+      ></div>
+      <div
+        style={{
+          backgroundColor: "lightblue",
+          position: "absolute",
+          width: "80px",
+          height: "150px",
+          left: possition + 120 + "px",
+        }}
+      ></div>
+    </>
+  );
+}
+
+export function getVirtualGridElement3(possition) {
+  return (
+    <>
+      <div
+        style={{
+          backgroundColor: "#e17055",
+          position: "absolute",
+          width: "190px",
+          height: "180px",
+          left: possition + 10 + "px",
+        }}
+      ></div>
+    </>
+  );
+}
+
+export function getVirtualGridElement2(possition) {
+  return (
+    <>
+      <div
+        style={{
+          backgroundColor: "#fdcb6e",
+          position: "absolute",
+          width: "80px",
+          height: "80px",
+          left: possition + 15 + "px",
+        }}
+      ></div>
+      <div
+        style={{
+          backgroundColor: "#a29bfe",
+          position: "absolute",
+          width: "80px",
+          height: "80px",
+          left: possition + 120 + "px",
+        }}
+      ></div>
+
+      <div
+        style={{
+          backgroundColor: "#74b9ff",
+          position: "absolute",
+          width: "185px",
+          height: "60px",
+          left: possition + 15 + "px",
+          top: "200px",
+        }}
+      ></div>
+    </>
+  );
 }
 
 export function getPublicationsList() {

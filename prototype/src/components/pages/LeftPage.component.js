@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "../flatPlanning/FlatPlanning.style.css";
+import {
+  getVirtualGridElement1,
+  getVirtualGridElement2,
+  getVirtualGridElement3,
+} from "../utils/Utils";
 const LeftPage = (props) => {
   const { width, height, title } = props;
 
@@ -34,6 +39,11 @@ const LeftPage = (props) => {
       >
         {title}
       </p>
+      {Math.random() < 0.3
+        ? getVirtualGridElement1(0)
+        : Math.random() < 0.5
+        ? getVirtualGridElement2(0)
+        : getVirtualGridElement3(0)}
     </div>
   );
 };
