@@ -223,7 +223,7 @@ export function useSend(setItems) {
       // Remove the item from the old category.
       newItems[fromId] = newItems[fromId].filter((item) => item !== key);
       // Add the item in the new category.
-      newItems[toId] = newItems[toId].concat(key);
+      //newItems[toId] = newItems[toId].concat(key);
       return newItems;
     });
   }, []); // eslint-disable-line
@@ -252,7 +252,7 @@ export const boardOptions = {
   // It's possible to drag the column only
   // by clicking on the header.
   dragStartPredicate: {
-    handle: ".board-column-header",
+    handle: ".move-item-muri",
   },
 };
 

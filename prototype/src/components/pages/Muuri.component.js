@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 /* Muuri-react */
 import { MuuriComponent } from "muuri-react";
+import OpenWithIcon from "@material-ui/icons/OpenWith";
 /* Utils & components */
 import {
   useFilter,
@@ -109,6 +110,10 @@ const Item = ({
     <div className={`item`} style={{ height: height, width: width }}>
       <div className="item-content">
         <div className="card" style={{ display: "flex" }}>
+          <OpenWithIcon
+            className="move-item-muri"
+            style={{ position: "fixed", right: "12px" }}
+          />
           <LeftPage
             width="210px"
             height="100%"
