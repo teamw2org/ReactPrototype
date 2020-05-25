@@ -601,8 +601,6 @@ section h4 {
 .board-item {
     position: absolute;
     width: 100%;
-    margin: 3px 0;
-    height: 74.4px;
 }
 .board-item.muuri-item-releasing {
     z-index: 9998;
