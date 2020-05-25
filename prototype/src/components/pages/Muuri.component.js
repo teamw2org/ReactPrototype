@@ -21,6 +21,12 @@ import {
 import "./style.css";
 import LeftPage from "./LeftPage.component";
 import RightPage from "./RightPage.component";
+import {
+  boardOptions,
+  columnOptions,
+  getRandomWord,
+  useSend,
+} from "../utils/Utils";
 
 // App.
 const App = (props) => {
@@ -73,7 +79,7 @@ const App = (props) => {
       <div style={{ paddingTop: "45px" }}>
         {/* Content */}
         <MuuriComponent
-          {...options}
+          {...boardOptions}
           propsToData={({ publication, title }) => ({ publication, title })}
           filter={filterFunction}
           sort={sort.value}
