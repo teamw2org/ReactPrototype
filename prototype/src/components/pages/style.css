@@ -48,7 +48,6 @@
     box-sizing: content-box;
 }
 .item {
-    display: none;
     position: absolute;
     line-height: 100px;
     margin: 10px;
@@ -592,7 +591,8 @@ section h4 {
 }
 .board-column-content {
     position: relative;
-    min-height: 95px;
+    height: 70% !important;
+    overflow: auto;
     transition: height 0.4s;
     border: 1px solid #ddd;
     border-top: 0;
@@ -616,7 +616,6 @@ section h4 {
 }
 .board-item-content {
     position: relative;
-    padding: 20px;
     background: #fff;
     border-radius: 4px;
     cursor: pointer;
