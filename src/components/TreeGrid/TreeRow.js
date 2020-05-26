@@ -25,16 +25,17 @@ export default function TreeRow(props) {
   const ref = useRef(null);
   const [, drop] = useDrop({
     accept: ItemTypes.CARD,
-    drop: () => {},
+    drop: (item, monitor) => {
+      item.rowTarget = row;
+    },
     hover(item, monitor) {
       if (!ref.current) {
         return;
       }
-      item.row = row;
       const dragIndex = item.index;
       const hoverIndex = index;
       // Don't replace items with themselves
-      if (dragIndex === hoverIndex) {
+      if (!dragIndex === hoverIndex) {
         return;
       }
       // Determine rectangle on screen
@@ -69,21 +70,17 @@ export default function TreeRow(props) {
       // but it's good here for the sake of performance
       // to avoid expensive index searches.
       item.index = hoverIndex;
-      item.row = row;
     },
   });
   const [{ isDragging }, drag] = useDrag({
-    item: { type: ItemTypes.CARD, id, index },
+    item: { type: ItemTypes.CARD, id, index, rowSource: row },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-    end: (dropResult, monitor) => {
-      const { id: id, row: rowHovered, index } = monitor.getItem();
-      const didDrop = monitor.didDrop();
-      if (didDrop) {
-        moveCard(id, rowHovered, row, index);
-      }
-    },
+    // isDragging: (monitor) => {
+    //   let item = monitor.getItem();
+    //   item.rowSource = row;
+    // },
   });
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
