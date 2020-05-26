@@ -541,8 +541,6 @@ section h4 {
     font-family: none;
     position: relative;
     margin-left: 1%;
-    max-width: 1000px;
-    min-width: 700px;
     margin: auto;
 }
 .board-column {
