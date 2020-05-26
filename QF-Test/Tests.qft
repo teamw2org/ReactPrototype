@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE RootStep>
+<RootStep id="_0" name="root" version="5.0.2">
+  <include>qfs.qft</include>
+  <comment>This file defines all windows and components for all tests.
+It also have functions that are usefull for multiple tests.</comment>
+  <CommentStep id="_2Yjp">
+    <heading>Copyright</heading>
+    <comment>© 2019 Werk II Medien- und Informationsges. mbH, Duisburg, Germany - ALL RIGHTS RESERVED. </comment>
+  </CommentStep>
+  <TestSet id="_2YtL" name="All tests">
+    <DataDriver id="_2YtM" name="Set environment">
+      <ProcedureCall id="_2YtN" procedure="General.Set environment"/>
+    </DataDriver>
+    <SetupSequence id="_2YtP" name="Start SUT">
+      <ProcedureCall id="_2YtQ" procedure="General.Set global variables"/>
+      <ProcedureCall id="_2YtR" procedure="General.Start SUT"/>
+    </SetupSequence>
+    <TestSet id="_2Ytm" name="Actual tests">
+      <discriminator>browser</discriminator>
+      <TestCase id="_2YtK" name="Test 1">
+        <CommentStep id="_2YtO">
+          <heading>Do nothing here</heading>
+          <comment>This is not a real test.
+It's here only to help to set up SUTs.</comment>
+        </CommentStep>
+      </TestCase>
+      <TestCase id="_2Ytn" name="Test 2">
+        <CommentStep id="_2Yto">
+          <heading>Do nothing here</heading>
+          <comment>This is not a real test.
+It's here only to help to set up SUTs.</comment>
+        </CommentStep>
+      </TestCase>
+    </TestSet>
+    <CleanupSequence id="_2YtT" name="Logout and stop SUT">
+      <ProcedureCall id="_2YtV" procedure="General.Stop SUT"/>
+    </CleanupSequence>
+  </TestSet>
+  <PackageRoot id="_3">
+    <Package id="_2Yl8" name="General">
+      <Procedure id="_2Yp9" name="Set environment">
+        <TableDataBinder id="_2Ynk" name="Browsers">
+          <TableBinderColumn title="browser" width="582">
+            <data>chrome</data>
+            <data>firefox</data>
+          </TableBinderColumn>
+          <TableBinderColumn title="browserdir" width="354">
+            <data>C:\Program Files (x86)\Google\Chrome\Application</data>
+            <data>C:\Program Files\Mozilla Firefox</data>
+          </TableBinderColumn>
+        </TableDataBinder>
+      </Procedure>
+      <Procedure id="_2Yp7" name="Set global variables">
+        <comment>It assumes that browser-related variables are already set.</comment>
+        <SetGlobalStep id="_2XrV" varname="url">
+          <default>http://localhost:3000/</default>
+        </SetGlobalStep>
+        <SetGlobalStep id="_2XrO" varname="client">
+          <default>$[rc.lookup('browser') + ' - ' + rc.lookup('url')]</default>
+          <comment>The value used for field "Client" in every test.</comment>
+        </SetGlobalStep>
+      </Procedure>
+      <Procedure id="_2YlA" name="Start SUT">
+        <comment>Opens the SUT if it is not already opened</comment>
+        <ClientWaiter client="$(client)" id="_2Xrb" local="true" raise="false"
+                      resvarname="is SUT Running" timeout="1">
+          <comment>German:
+Dieser Knoten prüft, ob das SUT bereits läuft. Das Ergebnis der Prüfung wird in der Variable isSUTRunning gespeichert. Diese Variable enthält entweder true, wenn das SUT läuft oder false, wenn das SUT nicht läuft. Im folgenden IF-Knoten wird diese Variable ausgewertet.
+
+English:
+This node checks whether the SUT is already running. The result of the check is stored in the isSUTRunning variable. This variable contains either true if the SUT is running or false if the SUT is not running. In the following IF node, this variable is evaluated.</comment>
+        </ClientWaiter>
+        <IfSequence id="_2Xrc"
+                    name="Start pubsrver if necessary + install CustomWebResolver + enlarge window + login"
+                    test="not $(is SUT Running)">
+          <BasicSequence id="_2Xrd" name="Start webEngine">
+            <BrowserClientStarter browser="$(browser)" client="$(client)"
+                                  executable="${qftest:java}" id="_2Xre"
+                                  mozhome="$(browserdir)" openwindow="false"/>
+            <ClientWaiter client="$(client)" id="_2Xrf"/>
+          </BasicSequence>
+          <BasicSequence id="_2Xrg" name="Set settings for browser">
+            <ProcedureCall id="_2Xrh"
+                           procedure="qfs.web.browser.settings.doStartupSettings">
+              <variable name="client">$(client)</variable>
+              <variable name="browser">$(browser)</variable>
+              <variable name="mozhome">$(browserdir)</variable>
+              <variable name="emptyCache">true</variable>
+              <variable name="enableCookies">true</variable>
+              <variable name="deleteCookies">false</variable>
+              <variable name="locale">en</variable>
+              <variable name="enableProxy">false</variable>
+              <variable name="proxyAddress"/>
+              <variable name="proxyPort"/>
+              <variable name="proxyAutoconfigurl"/>
+              <variable name="enableProxyBypass">false</variable>
+              <variable name="proxyBypass"/>
+              <variable name="mozprofile"/>
+              <variable name="compatibilitymode">no</variable>
+            </ProcedureCall>
+          </BasicSequence>
+          <BasicSequence id="_2Xri" name="Open browser window">
+            <BrowserClientStarter browser="${default:browser:chrome}"
+                                  client="$(client)"
+                                  executable="${qftest:java}" id="_2Xrj"
+                                  openwindow="true" url="$(url)"/>
+            <DocumentWaiter client="$(client)" component="genericDocument"
+                            id="_2Xrk" timeout="60000"/>
+          </BasicSequence>
+          <BasicSequence id="_2Xrl" name="Install customWebResolver">
+            <ProcedureCall id="_2Xrm"
+                           procedure="qfs.web.ajax.installCustomWebResolver">
+              <variable name="client">$(client)</variable>
+              <variable name="resolver">smartgwt</variable>
+              <variable name="version">1</variable>
+              <variable name="genericClasses">x-grid3-hd-row=TableHeader,
+x-window=Window,
+x-window-header-text=Label:WindowLabel,
+x-combo-list=List,
+x-combo-list-item=Item:ListItem,
+x-form-trigger=Button,</variable>
+              <variable name="attributesToGenericClasses">role=treegrid=Table,
+role=row=TableRow,
+role=gridcell=TableCell,
+role=columnheader=TableHeaderCell,
+role=heading=Label,
+type=checkbox=CheckBox:TableCellCheckBox@::ancestor=Table,
+role=combobox=ComboBox,</variable>
+              <variable name="tagsToGenericClasses"/>
+              <variable name="ignoreTags"/>
+              <variable name="ignoreByAttributes"/>
+              <variable name="autoIdPatterns"/>
+              <variable name="customIdAttributes"/>
+              <variable name="interestingByAttributes"/>
+              <variable name="attributesToQftFeature"/>
+              <variable name="removeProperties">goodClasses=%x-.*,</variable>
+              <comment>German:
+Dieser Aufruf installiert einen CustomWebResolver für AJAX Toolkits.
+Ein CustomWebResolver erlaubt es Ihnen die Spezifika Ihrer Webanwendung nach generischen Klassen von QF-Test zu übersetzen. Dieser Ansatz verbessert die Komponentenerkennung und erweitert die angebotenen Checkvarianten. Ihre Testfälle werden dadurch stabiler, robuster und lesbarer.
+Der wichtigste Parameter ist 'genericClasses'. Damit können Sie Werte des 'class' Attributes einer Komponente, z.B. 'btn', in einen QF-Test Button übersetzen. Dies geschieht mittels Angabe von btn=Button. Weitere Übersetzungen können sie kommasepariert angeben.
+Sie finden weitere Informationen im Kommentar der Prozedur selbst, hierfür einfach doppelt auf den Prozeduraufruf klicken.
+Im Handbuch finden Sie ein vollständiges Beispiel.
+
+English:
+This call installs a CustomWebResolver for AJAX Toolkits.
+A CustomWebResolver allows you to translate the specifics of your web application into generic classes of QF-Test. This approach improves component recognition and extends the check variants offered. This makes your test cases more stable, robust and readable.
+The most important parameter is 'genericClasses'. This allows you to translate values of the 'class' attribute of a component, e.g. 'btn', into a QF test button. This is done by specifying btn=Button. Further translations can be specified comma separated.
+You can find more information in the comment of the procedure itself, just double click on the procedure call.
+You can find a complete example in the manual.
+</comment>
+            </ProcedureCall>
+          </BasicSequence>
+          <BasicSequence id="_2Xrn"
+                         name="Insert Groovy SUT-Skript, WholeTextResolver for TreeNode">
+            <comment>German:
+Wenn aufgerufen, funktionieren die Checks beim TreeNode nicht, wenn diese nicht in einem Fenster liegen.
+
+Enlish:
+When called, the TreeNode checks do not work if they are not in a window.</comment>
+            <ClientScriptStep client="$(client)" id="_2Xro"
+                              interpreter="groovy"
+                              name="WholeTextResolver for TreeNode">
+              <code>import de.qfs.apps.qftest.client.web.dom.DomNode;
+
+def getWholeText = {node, text -&gt;
+    if(node != null &amp;&amp; node.isMatchingClass("TreeNode")) {
+        def parent = node.getParent();
+        if (parent != null &amp;&amp; "TR".equals(parent.getTagName())) {
+            def tds = node.getElementsByClassName("TD");
+            if (tds != null &amp;&amp; tds.length &gt; 0) {
+                def currentTextLenth = 0;
+                def currentTextIndex = 0;
+                for (int i = 0; i &lt; tds.length; i++) {
+                    def txt = tds[i].getText();
+                    if (txt.length() &gt;= currentTextLenth &amp;&amp; tds[i].isShowing()) {
+                        currentTextIndex = i;
+                        currentTextLenth = txt.length();
+                    }
+                }
+                return tds[currentTextIndex].getText();
+            } 
+            else {
+                return parent.getText();
+            }
+        }
+    }
+}
+resolvers.addWholeTextResolver("treenode_wholetext_resolver", getWholeText, "TreeNode")</code>
+            </ClientScriptStep>
+          </BasicSequence>
+          <BasicSequence id="_2Xrp"
+                         name="Insert Jython SUT-Skript, to find SPAN-Elements with text">
+            <comment>German:
+QF-Test auf die Sprünge helfen, indem wir für die Anwendung festlegen, dass bei "SPAN"-Elementen grundsätzlich der textuelle Inhalt - wenn verfügbar - als Merkmal aufgezeichnet wird.
+
+English:
+Help QF test, by specifying for the application that for "SPAN" elements the textual content - if available - is always recorded as a characteristic.</comment>
+            <ClientScriptStep client="$(client)" id="_2Xrq">
+              <code>def getFeature(node):
+    text = node.getText()
+    if (text and text != ""):
+        return text
+  
+resolvers.addResolver("contentAsSpanFeature", getFeature, "SPAN")
+</code>
+            </ClientScriptStep>
+          </BasicSequence>
+          <BasicSequence id="_2Xrr"
+                         name="Insert Jython sript, to let qfs 'click' on a button if it is NOT disabled (via image).">
+            <comment>German:
+Ohne diesen Resolver kann qfs auf manche Buttons nicht clicken.
+Es kam der angebliche Fehler "Die Zielkomponente ist deaktiviert und kann daher keine Events empfangen."
+
+English:
+Without this resolver qfs cannot click on some buttons.
+The alleged error "The target component is deactivated and therefore cannot receive any events" had occurred.</comment>
+            <ClientScriptStep client="$(client)" id="_2Xrs">
+              <code>def getImgSub(com):
+    if com.getClassName() == "IMG":
+        return com
+    for i in range(com.getChildCount()):
+        return getImgSub(com.getChild(i))
+
+def isEnabled(com):
+    img = getImgSub(com)
+    if img == None or img.getAttribute("src") == None:
+        return None
+    if "_Disabled" in img.getAttribute("src"):
+        return False
+    return True
+
+resolvers.addResolver("buttonEnabledResolver", isEnabled, "Button")</code>
+              <comment>QF-Test auf die Sprünge helfen, indem wir für die Anwendung festlegen, dass auf Buttons deren Attribut NICHT "_Disabled" enthält, gecklickt werden darf.
+Dazu wird der Komponentenbaum des Buttons rekursiv durchgegangen bis eine Imgage-Klasse gefunden wird. Diese wird dann ausgewertet.</comment>
+            </ClientScriptStep>
+          </BasicSequence>
+          <BasicSequence id="_2Xrt"
+                         name="Insert Jython sript, to let qfs 'click' on a button if it is NOT disabled (via table data).">
+            <comment>German:
+Ohne diesen Resolver kann qfs auf manche Buttons nicht clicken.
+Es kam der angebliche Fehler "Die Zielkomponente ist deaktiviert und kann daher keine Events empfangen."
+
+English:
+Without this resolver qfs cannot click on some buttons.
+The alleged error "The target component is deactivated and therefore cannot receive any events" had occurred.</comment>
+            <ClientScriptStep client="$(client)" id="_2Xru">
+              <code>def getTdSub(com):
+    if com.getClassName() == "TD":
+        return com
+    for i in range(com.getChildCount()):
+        return getTdSub(com.getChild(i))
+
+def isEnabled(com):
+    td = getTdSub(com)
+    if td == None or td.getAttribute("class") == None:
+        return None
+    if "customTextButtonDisabled" in td.getAttribute("class"):
+        return False
+    if "customTextButton" in td.getAttribute("class"):
+        return True
+    return True
+
+resolvers.addResolver("buttonEnabledResolverViaTD", isEnabled, "Button")</code>
+              <comment>German:
+QF-Test auf die Sprünge helfen, indem wir für die Anwendung festlegen, dass auf Buttons deren Attribut NICHT "_Disabled" enthält, gecklickt werden darf.
+Dazu wird der Komponentenbaum des Buttons rekursiv durchgegangen bis eine Imgage-Klasse gefunden wird. Diese wird dann ausgewertet.
+
+English:
+Help QF test, by specifying for the application that buttons whose attribute does NOT contain "_Disabled" may be clicked.
+To do this, the component tree of the button is recursively traversed until an image class is found. This is then evaluated.</comment>
+            </ClientScriptStep>
+          </BasicSequence>
+          <BasicSequence id="_2Xrv" name="Enlarge SUT window">
+            <ComponentEventStep client="$(client)" component="React"
+                                event="COMPONENT_RESIZED" id="_2Xrw"
+                                param1="1800" param2="1100"/>
+          </BasicSequence>
+        </IfSequence>
+      </Procedure>
+      <Procedure id="_2YnA" name="Stop SUT">
+        <WindowEventStep client="$(client)" component="React"
+                         event="WINDOW_CLOSING" id="_2XsG"/>
+      </Procedure>
+    </Package>
+  </PackageRoot>
+  <ExtraSequence id="_4"/>
+  <WindowList id="Window" uid="_2WgP">
+    <WebPageStep class="Window" feature="localhost:3000" height="648"
+                 id="React" uid="_2Yte" width="1007">
+      <extrafeature name="qfs:genericclass" negate="false" regexp="false"
+                    state="1">Window</extrafeature>
+      <extrafeature name="title" negate="false" regexp="false" state="1">React App</extrafeature>
+      <extrafeature name="url" negate="false" regexp="false" state="2">http://localhost:3000/</extrafeature>
+    </WebPageStep>
+  </WindowList>
+</RootStep>
