@@ -128,7 +128,7 @@ const Item = React.memo(({ id }) => {
 
   return (
     <div className="board-item" style={{ width: "100%" }}>
-      <div className="board-item-content">
+      <div className="board-item-content" id={`${id}-${Date.now()}`}>
         {`${id}`}
         <div className={`tab-item ${gridId}-tab-item`} />
       </div>
