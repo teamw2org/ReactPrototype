@@ -46,7 +46,7 @@ const VirtualGridElement = (props) => {
   const { width, height, title, viewType } = props;
 
   const [items, setItems] = useState({
-    todo: ["4", "6"],
+    todo: ["4 - " + Date.now(), "6 - " + Date.now()],
   });
 
   // UseSend is used when a item changes grid
@@ -72,11 +72,17 @@ const VirtualGridElement = (props) => {
   };
   const [{ isOver }, drop] = useDrop({
     accept: ItemTypes.CARD,
-    drop: (item, monitor) => console.log(item),
+    drop: (item, monitor) => addElement(item.rowSource),
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
   });
+
+  const addElement = (sourceRow) => {
+    let newItems = { ...items };
+    newItems.todo.push(sourceRow.label);
+    setItems(newItems);
+  };
 
   return { viewType } ? (
     <DragAndDrop>
@@ -123,8 +129,7 @@ const Item = React.memo(({ id }) => {
   return (
     <div className="board-item" style={{ width: "100%" }}>
       <div className="board-item-content">
-        <span>Item </span>
-        {`${id} - ${tag}`}
+        {`${id}`}
         <div className={`tab-item ${gridId}-tab-item`} />
       </div>
     </div>

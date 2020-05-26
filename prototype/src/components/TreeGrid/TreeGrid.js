@@ -9,6 +9,8 @@ import DragAndDrop from "../utils/DragAndDrop";
 import TreeRow from "./TreeRow";
 import TreeCell from "./TreeCell";
 import "./TreeGrid.style.css";
+import ItemTypes from "./ItemTypes";
+import { useDrop } from "react-dnd";
 
 export default function TreeGrid(props) {
   const [rowsState, setRows] = React.useState([]);
@@ -178,6 +180,18 @@ export default function TreeGrid(props) {
     [rowsState]
   );
 
+  const [{ isOver }, drop] = useDrop({
+    accept: ItemTypes.CARD,
+    drop: (item, monitor) => {
+      console.log("drop a");
+      console.log(item);
+      moveCard(item.id, item.rowTarget, item.rowSource, item.index);
+    },
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  });
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="custom pagination table">
@@ -185,7 +199,7 @@ export default function TreeGrid(props) {
           <TableRow>{columnssState}</TableRow>
         </TableHead>
         <DragAndDrop>
-          <TableBody>{rowsState}</TableBody>
+          <TableBody ref={drop}>{rowsState}</TableBody>
         </DragAndDrop>
       </Table>
     </TableContainer>
