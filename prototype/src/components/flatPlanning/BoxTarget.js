@@ -9,19 +9,9 @@ import Page from "../pages/FlatPlanner.component";
 import DragAndDrop from "../utils/DragAndDrop";
 
 export default function BoxTarget() {
-  const [{ isOver }, drop] = useDrop({
-    accept: ItemTypes.CARD,
-    drop: (item, monitor) => console.log(item),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
-  });
-
   return (
-    <DragAndDrop>
-      <div id="content" ref={drop}>
-        <Page />
-      </div>
-    </DragAndDrop>
+    <div id="content">
+      <Page />
+    </div>
   );
 }

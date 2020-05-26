@@ -11,6 +11,9 @@ import {
   useSend,
 } from "../utils/Utils";
 import "./style.css";
+import DragAndDrop from "../utils/DragAndDrop";
+import ItemTypes from "../TreeGrid/ItemTypes";
+import { useDrop } from "react-dnd";
 
 // Column component.
 export const Column = ({ children, actionClass, title }) => (
@@ -57,22 +60,55 @@ const VirtualGridElement = (props) => {
     )),
   };
 
-  return (
-    <Column
-      actionClass="todo"
-      title="No template assigned"
-      style={{ width: "100%" }}
-    >
-      {/* Column content */}
-      <MuuriComponent
-        style={{ width: "100%" }}
-        id={"TODO"}
-        onSend={onSend}
-        {...columnOptions}
-      >
-        {children.todo}
-      </MuuriComponent>
-    </Column>
+  // Children.
+  const childrenImage = {
+    todo: [
+      <img
+        src={`https://i.picsum.photos/id/237/198/300.jpg`}
+        style={{ width: "100%", height: "auto" }}
+        alt={""}
+      />,
+    ],
+  };
+  const [{ isOver }, drop] = useDrop({
+    accept: ItemTypes.CARD,
+    drop: (item, monitor) => console.log(item),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  });
+
+  return { viewType } ? (
+    <DragAndDrop>
+      <div ref={drop}>
+        <Column
+          actionClass="todo"
+          title="No template assigned"
+          style={{ width: "100%" }}
+        >
+          {/* Column content */}
+
+          <MuuriComponent
+            style={{ width: "100%" }}
+            id={"TODO"}
+            onSend={onSend}
+            {...columnOptions}
+          >
+            {children.todo}
+          </MuuriComponent>
+        </Column>
+      </div>
+    </DragAndDrop>
+  ) : (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        backgroundImage: "url(https://i.picsum.photos/id/237/198/300.jpg)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "contain",
+      }}
+    />
   );
 };
 

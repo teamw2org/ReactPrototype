@@ -64,6 +64,7 @@
 }
 .item.muuri-item-dragging {
     cursor: move;
+    text-align: center;
 }
 .item.muuri-item-hidden {
     z-index: 0;
@@ -650,11 +651,4 @@ section h4 {
     background: #4a9ff9;
     border-left: 1px solid #4088d5;
 }
-@media (max-width: 800px) {
-    .board-item-content {
-        text-align: center;
-    }
-    .board-item-content span {
-        display: none;
-    }
-}
+
