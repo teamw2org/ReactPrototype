@@ -2,5 +2,9 @@
     background-color: white !important;
 }
 .MuiCheckbox-colorSecondary.Mui-checked{
-    color: #00B0BC;
+    color: #00B0BC !important;
+}
+
+thead.MuiTableHead-root tr th span.MuiButtonBase-root{
+    color: white !important;
 }

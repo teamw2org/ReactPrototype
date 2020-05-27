@@ -165,7 +165,7 @@ const TreeGrid = (props) => {
         header={header}
         style={{ height: "100%", padding: "2px 5px 2px 5px" }}
         tableStyle={{ height: "100%" }}
-        scrollHeight="400px"
+        scrollHeight="700px"
         value={data.nodes}
         reorderableRows={true}
         lazy={true}

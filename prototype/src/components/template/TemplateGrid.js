@@ -74,8 +74,11 @@ export default function TemplateGrid(props) {
                   id="standard-basic"
                   onChange={(e) => filter(e.target.value)}
                   label="Template"
-                  InputProps={{ disableUnderline: true, spellCheck: false }}
-                  style={{ color: "white" }}
+                  InputProps={{
+                    disableUnderline: true,
+                    spellCheck: false,
+                    className: "inputWhiteColor",
+                  }}
                 />
               </TableCell>
             </TableRow>
