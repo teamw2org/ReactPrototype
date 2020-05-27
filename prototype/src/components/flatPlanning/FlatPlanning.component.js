@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import TreeGrid from "../customTreeGrid/CustomTreeGrid.component";
 import "./FlatPlanning.style.css";
 import Splitter from "m-react-splitters";
@@ -10,6 +10,8 @@ import Button from "@material-ui/core/Button";
 
 export default function FlatPlanning() {
   const splitterEl = useRef(null);
+  const [buttonColor, setButtonColor] = useState("lightgrey");
+  const [buttonTextColor, setButtonTextColor] = useState("black");
 
   const toggle = () => {
     const primaryPane = document.querySelector(".vertical.primary");
@@ -38,16 +40,29 @@ export default function FlatPlanning() {
           position="vertical"
           primaryPaneMinWidth={0}
           primaryPaneMaxWidth={"calc(100% - 10px)"}
-          primaryPaneWidth="70%"
+          primaryPaneWidth="calc(100% - 10px)"
           dispatchResize={true}
           postPoned={false}
           ref={splitterEl}
         >
           <>
             <Button
-              style={{ marginLeft: "8px", marginBottom: "8px" }}
+              style={{
+                marginLeft: "8px",
+                marginBottom: "8px",
+                backgroundColor: buttonColor,
+                color: buttonTextColor,
+              }}
               variant="contained"
-              onClick={toggle}
+              onClick={() => {
+                toggle();
+                setButtonColor(
+                  buttonColor === "lightgrey" ? "#00B0BC" : "lightgrey"
+                );
+                setButtonTextColor(
+                  buttonTextColor === "black" ? "white" : "black"
+                );
+              }}
             >
               Assign content
             </Button>
