@@ -35,6 +35,150 @@ It also have functions that are usefull for multiple tests.</comment>
           </CheckStringStep>
         </TestCase>
       </TestSet>
+      <TestSet id="_2Yuo" name="Flat planning">
+        <SetupSequence id="_2Yup" name="Go to flat planning">
+          <MouseEventStep clicks="1" client="$(client)"
+                          component="menuFlat_planning" event="MOUSE_MPRC"
+                          id="_2Yuq" modifiers="16"/>
+        </SetupSequence>
+        <TestCase id="_2Yur" name="Move document">
+          <TestStep id="_2YvS" name="Document 10 after document 0"
+                    reportname="Check that document 10 is after document 0">
+            <ProcedureCall id="_2Yvt" local="true"
+                           procedure="Flat planning.Get order of documents"
+                           retvarname="order">
+              <variable name="document 0">document_0</variable>
+              <variable name="document 1">document_10</variable>
+            </ProcedureCall>
+            <UnitStep client="$(client)" id="_2YvX">
+              <code>rc.check($(order) &gt; 0, 'Document 10 should be after document 0')</code>
+            </UnitStep>
+          </TestStep>
+          <ProcedureCall id="_2Yv-"
+                         procedure="Flat planning.Switch documents">
+            <variable name="document move icon 0">document_0 move icon</variable>
+            <variable name="document move icon 1">document_10 move icon</variable>
+          </ProcedureCall>
+          <TestStep id="_2Yvu" name="Document 10 before document 0"
+                    reportname="Check that document 10 is before document 0">
+            <ProcedureCall id="_2Yvv" local="true"
+                           procedure="Flat planning.Get order of documents"
+                           retvarname="order">
+              <variable name="document 0">document_0</variable>
+              <variable name="document 1">document_10</variable>
+            </ProcedureCall>
+            <UnitStep client="$(client)" id="_2Yvw">
+              <code>rc.check($(order) &lt; 0, 'Document 10 should be before document 0')</code>
+            </UnitStep>
+          </TestStep>
+          <ProcedureCall id="_2Yw0"
+                         procedure="Flat planning.Switch documents">
+            <variable name="document move icon 0">document_0 move icon</variable>
+            <variable name="document move icon 1">document_10 move icon</variable>
+          </ProcedureCall>
+          <TestStep id="_2Yvx" name="Document 10 after document 0"
+                    reportname="Check that document 10 is after document 0">
+            <ProcedureCall id="_2Yvy" local="true"
+                           procedure="Flat planning.Get order of documents"
+                           retvarname="order">
+              <variable name="document 0">document_0</variable>
+              <variable name="document 1">document_10</variable>
+            </ProcedureCall>
+            <UnitStep client="$(client)" id="_2Yvz">
+              <code>rc.check($(order) &gt; 0, 'Document 10 should be after document 0')</code>
+            </UnitStep>
+          </TestStep>
+        </TestCase>
+        <TestCase id="_2Yw1" name="Move more documents">
+          <TestStep id="_2Yw2" name="Check order"
+                    reportname="Check if order is 0 10 11">
+            <ProcedureCall id="_2Yw3" local="true"
+                           procedure="Flat planning.Get order of documents"
+                           retvarname="order 0 10">
+              <variable name="document 0">document_0</variable>
+              <variable name="document 1">document_10</variable>
+            </ProcedureCall>
+            <ProcedureCall id="_2YwD" local="true"
+                           procedure="Flat planning.Get order of documents"
+                           retvarname="order 10 11">
+              <variable name="document 0">document_10</variable>
+              <variable name="document 1">document_11</variable>
+            </ProcedureCall>
+            <UnitStep client="$(client)" id="_2Yw4">
+              <code>rc.check($(order 0 10) &gt; 0 and $(order 10 11) &gt; 0, 'Order of documents should be 0 10 11')</code>
+            </UnitStep>
+          </TestStep>
+          <ProcedureCall id="_2Yw5"
+                         procedure="Flat planning.Switch documents">
+            <variable name="document move icon 0">document_0 move icon</variable>
+            <variable name="document move icon 1">document_10 move icon</variable>
+          </ProcedureCall>
+          <TestStep id="_2YwG" name="Check order"
+                    reportname="Check if order is 10 0 11">
+            <ProcedureCall id="_2YwH" local="true"
+                           procedure="Flat planning.Get order of documents"
+                           retvarname="order 0 10">
+              <variable name="document 0">document_0</variable>
+              <variable name="document 1">document_10</variable>
+            </ProcedureCall>
+            <ProcedureCall id="_2YwI" local="true"
+                           procedure="Flat planning.Get order of documents"
+                           retvarname="order 0 11">
+              <variable name="document 0">document_0</variable>
+              <variable name="document 1">document_11</variable>
+            </ProcedureCall>
+            <UnitStep client="$(client)" id="_2YwJ">
+              <code>rc.check($(order 0 10) &lt; 0 and $(order 0 11) &gt; 0, 'Order of documents should be 10 0 11')</code>
+            </UnitStep>
+          </TestStep>
+          <ProcedureCall id="_2YwK"
+                         procedure="Flat planning.Switch documents">
+            <variable name="document move icon 0">document_0 move icon</variable>
+            <variable name="document move icon 1">document_11 move icon</variable>
+          </ProcedureCall>
+          <TestStep id="_2YwL" name="Check order"
+                    reportname="Check if order is 10 11 0">
+            <ProcedureCall id="_2YwM" local="true"
+                           procedure="Flat planning.Get order of documents"
+                           retvarname="order 10 11">
+              <variable name="document 0">document_10</variable>
+              <variable name="document 1">document_11</variable>
+            </ProcedureCall>
+            <ProcedureCall id="_2YwN" local="true"
+                           procedure="Flat planning.Get order of documents"
+                           retvarname="order 0 11">
+              <variable name="document 0">document_0</variable>
+              <variable name="document 1">document_11</variable>
+            </ProcedureCall>
+            <UnitStep client="$(client)" id="_2YwO">
+              <code>rc.check($(order 10 11) &gt; 0 and $(order 0 11) &lt; 0, 'Order of documents should be 10 11 0')</code>
+            </UnitStep>
+          </TestStep>
+          <ProcedureCall id="_2YwP"
+                         procedure="Flat planning.Switch documents">
+            <variable name="document move icon 0">document_10 move icon</variable>
+            <variable name="document move icon 1">document_0 move icon</variable>
+          </ProcedureCall>
+          <TestStep id="_2YwQ" name="Check order"
+                    reportname="Check if order is 0 10 11">
+            <ProcedureCall id="_2YwR" local="true"
+                           procedure="Flat planning.Get order of documents"
+                           retvarname="order 0 10">
+              <variable name="document 0">document_0</variable>
+              <variable name="document 1">document_10</variable>
+            </ProcedureCall>
+            <ProcedureCall id="_2YwS" local="true"
+                           procedure="Flat planning.Get order of documents"
+                           retvarname="order 10 11">
+              <variable name="document 0">document_10</variable>
+              <variable name="document 1">document_11</variable>
+            </ProcedureCall>
+            <UnitStep client="$(client)" id="_2YwT">
+              <code>rc.check($(order 0 10) &gt; 0 and $(order 10 11) &gt; 0, 'Order of documents should be 0 10 11')</code>
+            </UnitStep>
+          </TestStep>
+        </TestCase>
+      </TestSet>
     </TestSet>
     <CleanupSequence id="_2YtT" name="Logout and stop SUT">
       <ProcedureCall id="_2YtV" procedure="General.Stop SUT"/>
@@ -301,6 +445,44 @@ To do this, the component tree of the button is recursively traversed until an i
                         y="$[$(y) + $(h)/2 - $(dy)]"/>
       </Procedure>
     </Package>
+    <Package id="_2Yvm" name="Flat planning">
+      <Procedure id="_2Yvn" name="Get order of documents">
+        <variable name="document 0"/>
+        <variable name="document 1"/>
+        <FetchGeometryStep client="$(client)" component="$(document 0)"
+                           id="_2Yvo" local="true" xvarname="x0"
+                           yvarname="y0"/>
+        <FetchGeometryStep client="$(client)" component="$(document 1)"
+                           id="_2Yvp" local="true" xvarname="x1"
+                           yvarname="y1"/>
+        <ReturnStep id="_2Yvr" retval="$[$(x1) - $(x0) + $(y1) - $(y0)]"/>
+      </Procedure>
+      <Procedure id="_2YvM" name="Switch documents">
+        <variable name="document move icon 0"/>
+        <variable name="document move icon 1"/>
+        <FetchGeometryStep client="$(client)" component="Main composite"
+                           id="_2YvN" local="true" xvarname="dx"
+                           yvarname="dy"/>
+        <FetchGeometryStep client="$(client)"
+                           component="$(document move icon 0)"
+                           heightvarname="h0" id="_2YvO" local="true"
+                           widthvarname="w0" xvarname="x0" yvarname="y0"/>
+        <FetchGeometryStep client="$(client)"
+                           component="$(document move icon 1)"
+                           heightvarname="h1" id="_2YvP" local="true"
+                           widthvarname="w1" xvarname="x1" yvarname="y1"/>
+        <MouseEventStep clicks="1" client="$(client)"
+                        component="Main composite" event="MOUSE_PRESSED"
+                        hardevent="true" id="_2YvQ" modifiers="16"
+                        x="$[$(x1) + $(w1)/2 - $(dx)]"
+                        y="$[$(y1) + $(h1)/2 - $(dy)]"/>
+        <MouseEventStep clicks="1" client="$(client)"
+                        component="Main composite" event="MOUSE_RELEASED"
+                        hardevent="true" id="_2YvR" modifiers="16"
+                        x="$[$(x0) + $(w0)/2 - $(dx)]"
+                        y="$[$(y0) + $(h0)/2 - $(dy)]"/>
+      </Procedure>
+    </Package>
   </PackageRoot>
   <ExtraSequence id="_4"/>
   <WindowList id="Window" uid="_2WgP">
@@ -399,6 +581,41 @@ To do this, the component tree of the button is recursively traversed until an i
                               regexp="false" state="0">SPAN</extrafeature>
                 <extrafeature name="tag" negate="false" regexp="false"
                               state="0">SPAN</extrafeature>
+              </ComponentStep>
+            </ComponentStep>
+          </ComponentGroup>
+          <ComponentGroup id="_2Yus" name="Flat planning">
+            <ComponentStep class="DIV" id="document_0" uid="_2YvG">
+              <extrafeature name="class" negate="false" regexp="false"
+                            state="1">item muuri-item muuri-item-shown</extrafeature>
+              <extrafeature name="qfs:originalid" negate="false" regexp="true"
+                            state="2">0_document-[0-9]+</extrafeature>
+              <ComponentStep class="SVG" id="document_0 move icon"
+                             uid="_2YvH">
+                <extrafeature name="class" negate="false" regexp="false"
+                              state="1">MuiSvgIcon-root move-item-muri</extrafeature>
+              </ComponentStep>
+            </ComponentStep>
+            <ComponentStep class="DIV" id="document_10" uid="_2YvC">
+              <extrafeature name="class" negate="false" regexp="false"
+                            state="1">item muuri-item muuri-item-shown</extrafeature>
+              <extrafeature name="qfs:originalid" negate="false" regexp="true"
+                            state="2">10_document-[0-9]+</extrafeature>
+              <ComponentStep class="SVG" id="document_10 move icon"
+                             uid="_2YvF">
+                <extrafeature name="class" negate="false" regexp="false"
+                              state="1">MuiSvgIcon-root move-item-muri</extrafeature>
+              </ComponentStep>
+            </ComponentStep>
+            <ComponentStep class="DIV" id="document_11" uid="_2YwE">
+              <extrafeature name="class" negate="false" regexp="false"
+                            state="1">item muuri-item muuri-item-shown</extrafeature>
+              <extrafeature name="qfs:originalid" negate="false" regexp="true"
+                            state="2">11_document-[0-9]+</extrafeature>
+              <ComponentStep class="SVG" id="document_11 move icon"
+                             uid="_2YwF">
+                <extrafeature name="class" negate="false" regexp="false"
+                              state="1">MuiSvgIcon-root move-item-muri</extrafeature>
               </ComponentStep>
             </ComponentStep>
           </ComponentGroup>
