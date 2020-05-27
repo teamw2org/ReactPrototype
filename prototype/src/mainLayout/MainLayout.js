@@ -10,14 +10,12 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
-import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MainListItems from "./MainListItems";
 import SecondaryListItems from "./SecondaryListItems";
 import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
 import Logo from "../images/logo.png";
 import BucketsTree from "../components/BucketsTree.component";
 import DocumentsGrid from "../components/fakeData/FakeGrid.component";
@@ -27,19 +25,6 @@ import Task from "../components/customTreeGrid/CustomTreeGrid.component";
 import FlatPlanning from "../components/flatPlanning/FlatPlanning.component";
 import LoginPanel from "../components/login/Login.component";
 import Muri from "../components/pages/Muuri.component";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Priint
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
