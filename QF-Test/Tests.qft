@@ -180,6 +180,11 @@ It also have functions that are usefull for multiple tests.</comment>
         </TestCase>
         <TestCase id="_2Ywb" name="Add action cat"
                   reportname="Add action cat to document 10">
+          <SetupSequence id="_2Yx-" name="Open assign content">
+            <MouseEventStep clicks="1" client="$(client)"
+                            component="button Assign content"
+                            event="MOUSE_MPRC" id="_2Yy0" modifiers="16"/>
+          </SetupSequence>
           <TestStep id="_2Yxn"
                     name="Check that there is no action cat in document 10">
             <ComponentWaiter absence="true" client="$(client)"
@@ -619,6 +624,15 @@ To do this, the component tree of the button is recursively traversed until an i
             </ComponentStep>
           </ComponentGroup>
           <ComponentGroup id="_2Yus" name="Flat planning">
+            <ComponentStep class="Button" feature="Assign content"
+                           id="button Assign content" uid="_2Yx+">
+              <extrafeature name="class" negate="false" regexp="false"
+                            state="1">MuiButtonBase-root MuiButton-root MuiButton-contained</extrafeature>
+              <extrafeature name="qfs:genericclass" negate="false"
+                            regexp="false" state="1">Button</extrafeature>
+              <extrafeature name="qfs:label" negate="false" regexp="false"
+                            state="2">Assign content</extrafeature>
+            </ComponentStep>
             <ComponentGroup id="_2YxI" name="Documents">
               <ComponentStep class="DIV" id="document_0" uid="_2YvG">
                 <extrafeature name="class" negate="false" regexp="false"
