@@ -12,6 +12,7 @@ export default function secondaryListItems(props) {
     <div>
       <ListSubheader inset>Administration</ListSubheader>
       <ListItem
+        id="menuContentTreeGrid"
         button
         onClick={props.changeLayout.bind(null, "contentTreeGrid")}
       >
@@ -20,13 +21,21 @@ export default function secondaryListItems(props) {
         </ListItemIcon>
         <ListItemText primary="Content Tree Grid" />
       </ListItem>
-      <ListItem button onClick={props.changeLayout.bind(null, "task")}>
+      <ListItem
+        id="menuTask"
+        button
+        onClick={props.changeLayout.bind(null, "task")}
+      >
         <ListItemIcon>
           <AssignmentIcon />
         </ListItemIcon>
         <ListItemText primary="Custom Tree Grid" />
       </ListItem>
-      <ListItem button onClick={props.changeLayout.bind(null, "users")}>
+      <ListItem
+        id="menuUsers"
+        button
+        onClick={props.changeLayout.bind(null, "users")}
+      >
         <ListItemIcon>
           <GroupIcon />
         </ListItemIcon>
