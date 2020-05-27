@@ -1,0 +1,6 @@
+.MuiTableRow-root.Mui-selected{
+    background-color: white !important;
+}
+.MuiCheckbox-colorSecondary.Mui-checked{
+    color: #00B0BC;
+}

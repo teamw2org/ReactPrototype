@@ -20,7 +20,7 @@ import Logo from "../images/logo.png";
 import BucketsTree from "../components/BucketsTree.component";
 import DocumentsGrid from "../components/fakeData/FakeGrid.component";
 import TreeGrid from "../components/TreeGrid.component";
-import Users from "../components/Users.component";
+import Users from "../components/users/Users.component";
 import Task from "../components/customTreeGrid/CustomTreeGrid.component";
 import FlatPlanning from "../components/flatPlanning/FlatPlanning.component";
 import LoginPanel from "../components/login/Login.component";
