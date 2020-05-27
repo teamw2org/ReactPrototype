@@ -89,13 +89,7 @@ export function getVirtualGridElement1(possition) {
           display: "flex",
           justifyContent: "center",
         }}
-      >
-        <img
-          src={`https://i.picsum.photos/id/237/198/300.jpg`}
-          style={{ width: "100%", height: "auto" }}
-          alt={""}
-        />
-      </div>
+      ></div>
       <div
         style={{
           backgroundColor: "lightblue",

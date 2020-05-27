@@ -24,6 +24,12 @@ export default function TemplateGrid(props) {
     createData("tsg_Angebot"),
     createData("grid_template"),
     createData("Header Briefing"),
+    createData("retail_ProductText_2020"),
+    createData("retail_Image+Price_2020"),
+    createData("retail_Detail Image_2020"),
+    createData("tsg_Angebot_2020"),
+    createData("grid_template_2020"),
+    createData("Header Briefing_2020"),
   ];
 
   const [rowsState, setRowState] = new useState(rows);
@@ -48,12 +54,13 @@ export default function TemplateGrid(props) {
   return (
     <>
       <TableContainer component={Paper}>
-        <Table aria-label="custom pagination table">
+        <Table stickyHeader aria-label="custom pagination table">
           <TableHead>
             <TableRow>
               <TableCell
                 style={{
                   padding: "5px",
+                  backgroundColor: "#00B0BC",
                 }}
               >
                 <SearchIcon

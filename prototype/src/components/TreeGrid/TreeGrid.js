@@ -80,7 +80,8 @@ export default function TreeGrid(props) {
     for (const element of cellElements) {
       cellElementsList.push(
         <TreeCell
-          //key={Math.random()}
+          // key={Math.random()}
+          style={{ backgroundColor: "#00B0BC" }}
           order={newOrder}
           orderBy={newOrderBy}
           onRequestSort={handleRequestSort}
@@ -194,7 +195,7 @@ export default function TreeGrid(props) {
 
   return (
     <TableContainer component={Paper}>
-      <Table aria-label="custom pagination table">
+      <Table stickyHeader aria-label="custom pagination table">
         <TableHead>
           <TableRow>{columnssState}</TableRow>
         </TableHead>
