@@ -11,35 +11,35 @@ import MuseumIcon from "@material-ui/icons/Museum";
 export default function mainListItems(props) {
   return (
     <div>
-      <ListItem button onClick={props.changeLayout.bind(null, "content")}>
+      <ListItem
+        id="menuContent"
+        button
+        onClick={props.changeLayout.bind(null, "content")}
+      >
         <ListItemIcon>
           <FolderSpecialIcon />
         </ListItemIcon>
         <ListItemText primary="Content" />
       </ListItem>
-      <ListItem button onClick={props.changeLayout.bind(null, "documents")}>
+      <ListItem
+        id="menuDocuments"
+        button
+        onClick={props.changeLayout.bind(null, "documents")}
+      >
         <ListItemIcon>
           <StorageIcon />
         </ListItemIcon>
-        <ListItemText primary="10.000 fake data" />
+        <ListItemText primary="10.000 items" />
       </ListItem>
-      <ListItem button onClick={props.changeLayout.bind(null, "flat_planning")}>
+      <ListItem
+        id="menuFlat_planning"
+        button
+        onClick={props.changeLayout.bind(null, "flat_planning")}
+      >
         <ListItemIcon>
           <BorderClearIcon />
         </ListItemIcon>
         <ListItemText primary="Flat planning" />
-      </ListItem>
-      <ListItem button onClick={props.changeLayout.bind(null, "login")}>
-        <ListItemIcon>
-          <SupervisedUserCircleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Login" />
-      </ListItem>
-      <ListItem button onClick={props.changeLayout.bind(null, "muri")}>
-        <ListItemIcon>
-          <MuseumIcon />
-        </ListItemIcon>
-        <ListItemText primary="muri" />
       </ListItem>
     </div>
   );
