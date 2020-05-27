@@ -10,36 +10,21 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
-import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MainListItems from "./MainListItems";
 import SecondaryListItems from "./SecondaryListItems";
 import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
 import Logo from "../images/logo.png";
 import BucketsTree from "../components/BucketsTree.component";
-import DocumentsGrid from "../components/DocumentsGrid.component";
+import DocumentsGrid from "../components/fakeData/FakeGrid.component";
 import TreeGrid from "../components/TreeGrid.component";
-import Users from "../components/Users.component";
-import Task from "../components/Task.component";
+import Users from "../components/users/Users.component";
+import Task from "../components/customTreeGrid/CustomTreeGrid.component";
 import FlatPlanning from "../components/flatPlanning/FlatPlanning.component";
 import LoginPanel from "../components/login/Login.component";
 import Muri from "../components/pages/Muuri.component";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Priint
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
@@ -114,9 +99,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
   },
   container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-    height: "85%",
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+    height: "93%",
   },
   paper: {
     padding: theme.spacing(2),
@@ -242,9 +227,6 @@ export default function Dashboard() {
         <Container maxWidth="xl" className={classes.container}>
           {currentLayoutState}
         </Container>
-        <Box pt={4}>
-          <Copyright />
-        </Box>
       </main>
     </div>
   );

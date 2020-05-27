@@ -39,3 +39,6 @@ th span.MuiButtonBase-root{
 .ReactVirtualized__Table__headerColumn span{
     color: white;
 }
+.MuiTableCell-stickyHeader{
+    background-color: #00B0BC !important;
+}

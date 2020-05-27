@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import TreeGrid from "./TreeGrid/TreeGrid";
+import TreeGrid from "./TreeGrid";
 import base64 from "react-native-base64";
-import DragAndDrop from "./utils/DragAndDrop";
+import DragAndDrop from "../utils/DragAndDrop";
 
 export default function Task() {
   function setChildren(data, row) {

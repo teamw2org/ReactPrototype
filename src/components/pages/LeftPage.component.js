@@ -7,7 +7,7 @@ import {
 } from "../utils/Utils";
 import DragAndDrop from "../utils/DragAndDrop";
 import { Column } from "./VirtualGridElement.component";
-import ItemTypes from "../TreeGrid/ItemTypes";
+import ItemTypes from "../customTreeGrid/ItemTypes";
 import { useDrop } from "react-dnd";
 const LeftPage = (props) => {
   const { width, height, title, checkState } = props;

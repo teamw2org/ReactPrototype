@@ -10,7 +10,7 @@ import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 export default function secondaryListItems(props) {
   return (
     <div>
-      <ListSubheader inset>Administration</ListSubheader>
+      <ListSubheader inset>Example Text</ListSubheader>
       <ListItem
         id="menuContentTreeGrid"
         button

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import TableCell from "@material-ui/core/TableCell";
@@ -21,7 +20,7 @@ export default function TreeRow(props) {
       },
     },
   });
-  const classes = useRowStyles();
+
   const ref = useRef(null);
   const [, drop] = useDrop({
     accept: ItemTypes.CARD,
@@ -77,12 +76,8 @@ export default function TreeRow(props) {
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-    // isDragging: (monitor) => {
-    //   let item = monitor.getItem();
-    //   item.rowSource = row;
-    // },
   });
-  const opacity = isDragging ? 0 : 1;
+
   drag(drop(ref));
 
   useEffect(() => {

@@ -63,8 +63,14 @@ const App = (props) => {
   ));
 
   return (
-    <div>
-      <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        maxHeight: "calc(100% - 38px)",
+      }}
+    >
+      <div style={{ boxSizing: "border-box", paddingBottom: "10px" }}>
         <Input
           onKeyUp={(e) => setFilter({ ...filter, search: e.target.value })}
         />
@@ -77,7 +83,7 @@ const App = (props) => {
           onChange={(e) => setSort({ ...sort, value: e.target.value })}
         />
       </div>
-      <div style={{ paddingTop: "45px" }}>
+      <div style={{ overflow: "auto" }}>
         {/* Content */}
         <MuuriComponent
           {...boardOptions}
@@ -87,10 +93,6 @@ const App = (props) => {
         >
           {children}
         </MuuriComponent>
-        {/* Footer */}
-        <Footer>
-          <Button onClick={() => setItems(items.concat(generateItems()))} />
-        </Footer>
       </div>
     </div>
   );

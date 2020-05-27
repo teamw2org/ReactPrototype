@@ -12,7 +12,7 @@ import {
 } from "../utils/Utils";
 import "./style.css";
 import DragAndDrop from "../utils/DragAndDrop";
-import ItemTypes from "../TreeGrid/ItemTypes";
+import ItemTypes from "../customTreeGrid/ItemTypes";
 import { useDrop } from "react-dnd";
 
 // Column component.

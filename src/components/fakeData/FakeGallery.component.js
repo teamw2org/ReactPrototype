@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import VirtualDraggableGrid from "react-virtual-draggable-grid";
-import SimpleDialog from "./Modal/Modal.component";
+import SimpleDialog from "../modal/Modal.component";
 
 const ItemComponent = (props) => {
   const { rowTMP, imgNr, styles, handleClick } = props;
@@ -91,7 +91,7 @@ export default class Grid extends React.Component {
 
     function prepareData() {
       let preparedData = [];
-      var data = require("../fakeData/fake10000.json");
+      var data = require("../../fakeData/fake10000.json");
       let i = 0;
       for (const element of data.data) {
         i += 1;
