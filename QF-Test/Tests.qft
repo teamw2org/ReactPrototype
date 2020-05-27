@@ -18,19 +18,23 @@ It also have functions that are usefull for multiple tests.</comment>
     </SetupSequence>
     <TestSet id="_2Ytm" name="Actual tests">
       <discriminator>browser</discriminator>
-      <TestCase id="_2YtK" name="Basic tree - find green cat">
-        <MouseEventStep clicks="1" client="$(client)"
-                        component="The top button" event="MOUSE_MPRC"
-                        id="_2Yt-" modifiers="16"/>
-        <MouseEventStep clicks="1" client="$(client)" component="Cats arrow"
-                        event="MOUSE_MPRC" id="_2Yu0" modifiers="16" x="1"
-                        y="5"/>
-        <CheckStringStep client="$(client)"
-                         component="spanGreent_Cat_:_100652_:_product2"
-                         id="_2Yu1">
-          <text>Greent Cat : 100652 : product</text>
-        </CheckStringStep>
-      </TestCase>
+      <TestSet id="_2Yum" name="Content">
+        <SetupSequence id="_2Yun" name="Go to content">
+          <MouseEventStep clicks="1" client="$(client)"
+                          component="menuContent" event="MOUSE_MPRC"
+                          id="_2Yt-" modifiers="16"/>
+        </SetupSequence>
+        <TestCase id="_2YtK" name="Basic tree - find green cat">
+          <ProcedureCall id="_2Yuh" procedure="Content.Click arrow">
+            <variable name="item">spanCats_:_100650_:_:_category</variable>
+          </ProcedureCall>
+          <CheckStringStep client="$(client)"
+                           component="spanGreent_Cat_:_100652_:_product2"
+                           id="_2Yu1">
+            <text>Greent Cat : 100652 : product</text>
+          </CheckStringStep>
+        </TestCase>
+      </TestSet>
     </TestSet>
     <CleanupSequence id="_2YtT" name="Logout and stop SUT">
       <ProcedureCall id="_2YtV" procedure="General.Stop SUT"/>
@@ -282,6 +286,21 @@ To do this, the component tree of the button is recursively traversed until an i
                          event="WINDOW_CLOSING" id="_2XsG"/>
       </Procedure>
     </Package>
+    <Package id="_2YuI" name="Content">
+      <Procedure id="_2Yue" name="Click arrow">
+        <variable name="item"/>
+        <FetchGeometryStep client="$(client)" component="$(item)"
+                           heightvarname="h" id="_2Yuf" local="true"
+                           xvarname="x" yvarname="y"/>
+        <FetchGeometryStep client="$(client)" component="React.body"
+                           id="_2Yuk" local="true" xvarname="dx"
+                           yvarname="dy"/>
+        <MouseEventStep clicks="1" client="$(client)" component="React.body"
+                        event="MOUSE_MPRC" hardevent="true" id="_2Yug"
+                        modifiers="16" x="$[$(x) - 12 - $(dx)]"
+                        y="$[$(y) + $(h)/2 - $(dy)]"/>
+      </Procedure>
+    </Package>
   </PackageRoot>
   <ExtraSequence id="_4"/>
   <WindowList id="Window" uid="_2WgP">
@@ -291,63 +310,99 @@ To do this, the component tree of the button is recursively traversed until an i
                     state="1">Window</extrafeature>
       <extrafeature name="title" negate="false" regexp="false" state="1">React App</extrafeature>
       <extrafeature name="url" negate="false" regexp="false" state="2">http://localhost:3000/</extrafeature>
-      <ComponentStep class="UL" id="Ribbon" uid="_2Ytr">
-        <extrafeature name="class" negate="false" regexp="false" state="2">MuiList-root MuiList-padding</extrafeature>
-        <ComponentStep class="Button" id="The top button" uid="_2Yts">
-          <extrafeature name="class" negate="false" regexp="false" state="0">MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button</extrafeature>
-          <extrafeature name="qfs:class" negate="false" regexp="false"
-                        state="0">DIV</extrafeature>
-          <extrafeature name="qfs:genericclass" negate="false" regexp="false"
-                        state="0">Button</extrafeature>
-          <extrafeature name="qfs:systemclass" negate="false" regexp="false"
-                        state="0">DIV</extrafeature>
-          <extrafeature name="tag" negate="false" regexp="false" state="0">DIV</extrafeature>
-          <comment>Fuck, give names to these things, guys!</comment>
-        </ComponentStep>
-      </ComponentStep>
-      <ComponentStep class="MAIN" classcount="1" classindex="0" height="998"
-                     id="Main composite" uid="_2Ytt" width="1711" x="72"
-                     y="0">
-        <extrafeature name="class" negate="false" regexp="false" state="0">makeStyles-content-13</extrafeature>
+      <ComponentStep class="BODY" id="React.body" uid="_2Yuj">
         <extrafeature name="qfs:class" negate="false" regexp="false"
-                      state="0">MAIN</extrafeature>
+                      state="0">BODY</extrafeature>
         <extrafeature name="qfs:systemclass" negate="false" regexp="false"
-                      state="0">MAIN</extrafeature>
-        <extrafeature name="tag" negate="false" regexp="false" state="0">MAIN</extrafeature>
-        <ComponentGroup id="_2Yu7" name="The tree from the top page">
-          <ComponentStep class="SPAN" id="Cats arrow" uid="_2Ytu">
-            <extrafeature name="class" negate="false" regexp="false"
-                          state="0">ant-tree-switcher ant-tree-switcher_close</extrafeature>
-            <extrafeature name="qfs:class" negate="false" regexp="false"
-                          state="0">SPAN</extrafeature>
-            <extrafeature name="qfs:systemclass" negate="false" regexp="false"
-                          state="0">SPAN</extrafeature>
-            <extrafeature name="tag" negate="false" regexp="false" state="0">SPAN</extrafeature>
+                      state="0">BODY</extrafeature>
+        <extrafeature name="tag" negate="false" regexp="false" state="0">BODY</extrafeature>
+        <ComponentStep class="UL" id="Ribbon" uid="_2Ytr">
+          <extrafeature name="class" negate="false" regexp="false" state="2">MuiList-root MuiList-padding</extrafeature>
+          <ComponentStep class="Button" id="menuContent" name="menuContent"
+                         uid="_2YuB">
+            <extrafeature name="id" negate="false" regexp="false" state="2">menuContent</extrafeature>
           </ComponentStep>
-          <ComponentStep class="SPAN" feature="Greent Cat : 100652 : product"
-                         id="spanGreent_Cat_:_100652_:_product" uid="_2Yty">
-            <extrafeature name="class" negate="false" regexp="false"
-                          state="0">ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close</extrafeature>
-            <extrafeature name="qfs:class" negate="false" regexp="false"
-                          state="0">SPAN</extrafeature>
-            <extrafeature name="qfs:systemclass" negate="false" regexp="false"
-                          state="0">SPAN</extrafeature>
-            <extrafeature name="tag" negate="false" regexp="false" state="0">SPAN</extrafeature>
-            <ComponentStep class="SPAN"
-                           feature="Greent Cat : 100652 : product"
-                           id="spanGreent_Cat_:_100652_:_product2"
-                           uid="_2Ytz">
+          <ComponentStep class="Button" id="menuDocuments"
+                         name="menuDocuments" uid="_2YuC">
+            <extrafeature name="id" negate="false" regexp="false" state="2">menuDocuments</extrafeature>
+          </ComponentStep>
+          <ComponentStep class="Button" id="menuFlat_planning"
+                         name="menuFlat_planning" uid="_2YuD">
+            <extrafeature name="id" negate="false" regexp="false" state="2">menuFlat_planning</extrafeature>
+          </ComponentStep>
+          <ComponentStep class="Button" id="menuContentTreeGrid"
+                         name="menuContentTreeGrid" uid="_2YuF">
+            <extrafeature name="id" negate="false" regexp="false" state="2">menuContentTreeGrid</extrafeature>
+          </ComponentStep>
+          <ComponentStep class="Button" id="menuTask" name="menuTask"
+                         uid="_2YuG">
+            <extrafeature name="id" negate="false" regexp="false" state="2">menuTask</extrafeature>
+          </ComponentStep>
+          <ComponentStep class="Button" id="menuUsers" name="menuUsers"
+                         uid="_2YuH">
+            <extrafeature name="id" negate="false" regexp="false" state="2">menuUsers</extrafeature>
+          </ComponentStep>
+        </ComponentStep>
+        <ComponentStep class="MAIN" id="Main composite" uid="_2Ytt">
+          <extrafeature name="class" negate="false" regexp="false" state="1">makeStyles-content-13</extrafeature>
+          <ComponentGroup id="_2Yu7" name="Content">
+            <ComponentStep class="SPAN" classcount="52" classindex="21"
+                           feature="Cats : 100650 : : category" height="24"
+                           id="spanCats_:_100650_:_:_category" uid="_2Yua"
+                           width="172" x="48" y="292">
               <extrafeature name="class" negate="false" regexp="false"
-                            state="0">ant-tree-title</extrafeature>
+                            state="0">ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open</extrafeature>
               <extrafeature name="qfs:class" negate="false" regexp="false"
                             state="0">SPAN</extrafeature>
               <extrafeature name="qfs:systemclass" negate="false"
                             regexp="false" state="0">SPAN</extrafeature>
               <extrafeature name="tag" negate="false" regexp="false"
                             state="0">SPAN</extrafeature>
+              <comment>This is just wrong</comment>
+              <ComponentStep class="SPAN" classcount="1" classindex="0"
+                             feature="Cats : 100650 : : category" height="16"
+                             id="spanCats_:_100650_:_:_category2" uid="_2Yub"
+                             width="164" x="4" y="4">
+                <extrafeature name="class" negate="false" regexp="false"
+                              state="0">ant-tree-title</extrafeature>
+                <extrafeature name="qfs:class" negate="false" regexp="false"
+                              state="0">SPAN</extrafeature>
+                <extrafeature name="qfs:systemclass" negate="false"
+                              regexp="false" state="0">SPAN</extrafeature>
+                <extrafeature name="tag" negate="false" regexp="false"
+                              state="0">SPAN</extrafeature>
+              </ComponentStep>
             </ComponentStep>
-          </ComponentStep>
-        </ComponentGroup>
+            <ComponentStep class="SPAN" classcount="52" classindex="27"
+                           feature="Greent Cat : 100652 : product" height="24"
+                           id="spanGreent_Cat_:_100652_:_product" uid="_2Yuc"
+                           width="198" x="72" y="348">
+              <extrafeature name="class" negate="false" regexp="false"
+                            state="0">ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close</extrafeature>
+              <extrafeature name="qfs:class" negate="false" regexp="false"
+                            state="0">SPAN</extrafeature>
+              <extrafeature name="qfs:systemclass" negate="false"
+                            regexp="false" state="0">SPAN</extrafeature>
+              <extrafeature name="tag" negate="false" regexp="false"
+                            state="0">SPAN</extrafeature>
+              <comment>This is just wrong</comment>
+              <ComponentStep class="SPAN" classcount="1" classindex="0"
+                             feature="Greent Cat : 100652 : product"
+                             height="16"
+                             id="spanGreent_Cat_:_100652_:_product2"
+                             uid="_2Yud" width="190" x="4" y="4">
+                <extrafeature name="class" negate="false" regexp="false"
+                              state="0">ant-tree-title</extrafeature>
+                <extrafeature name="qfs:class" negate="false" regexp="false"
+                              state="0">SPAN</extrafeature>
+                <extrafeature name="qfs:systemclass" negate="false"
+                              regexp="false" state="0">SPAN</extrafeature>
+                <extrafeature name="tag" negate="false" regexp="false"
+                              state="0">SPAN</extrafeature>
+              </ComponentStep>
+            </ComponentStep>
+          </ComponentGroup>
+        </ComponentStep>
       </ComponentStep>
     </WebPageStep>
   </WindowList>
