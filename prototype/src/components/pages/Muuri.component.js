@@ -107,7 +107,11 @@ const Item = ({
   checkState,
 }) => {
   return (
-    <div className={`item`} style={{ height: height, width: width }}>
+    <div
+      id={title + "-" + Date.now()}
+      className={`item`}
+      style={{ height: height, width: width }}
+    >
       <div className="item-content">
         <div className="card" style={{ display: "flex" }}>
           <OpenWithIcon

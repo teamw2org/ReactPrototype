@@ -11,11 +11,9 @@ const RightPage = (props) => {
   useEffect(() => {}, [checkState]);
 
   const getItems = () => {
-    return Math.random() < 0.3
+    return Math.random() < 0.5
       ? getVirtualGridElement1(210)
-      : Math.random() < 0.5
-      ? getVirtualGridElement2(210)
-      : getVirtualGridElement3(210);
+      : getVirtualGridElement2(210);
   };
   const [items, setStateItems] = React.useState([getItems()]);
 
