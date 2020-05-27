@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TreeGrid from "./TreeGrid/TreeGrid";
 import base64 from "react-native-base64";
+import DragAndDrop from "./utils/DragAndDrop";
 
 export default function Task() {
   function setChildren(data, row) {
@@ -72,35 +73,37 @@ export default function Task() {
   }
 
   return (
-    <TreeGrid
-      rows={rowsState}
-      columns={[
-        {
-          width: 200,
-          label: "Label",
-          dataKey: "label",
-          visible: true,
-        },
-        {
-          width: 100,
-          label: "Identifier",
-          dataKey: "identifier",
-          numeric: false,
-          visible: true,
-          align: "right",
-        },
-        {
-          width: 100,
-          label: "Entity Identifier",
-          dataKey: "entityBucketId",
-          numeric: false,
-          visible: true,
-          align: "right",
-        },
-      ]}
-      onExpand={handleExpandChange}
-      onSort={handleSortChange}
-      onSortRows={handleSortRowsChange}
-    />
+    <DragAndDrop>
+      <TreeGrid
+        rows={rowsState}
+        columns={[
+          {
+            width: 200,
+            label: "Label",
+            dataKey: "label",
+            visible: true,
+          },
+          {
+            width: 100,
+            label: "Identifier",
+            dataKey: "identifier",
+            numeric: false,
+            visible: true,
+            align: "right",
+          },
+          {
+            width: 100,
+            label: "Entity Identifier",
+            dataKey: "entityBucketId",
+            numeric: false,
+            visible: true,
+            align: "right",
+          },
+        ]}
+        onExpand={handleExpandChange}
+        onSort={handleSortChange}
+        onSortRows={handleSortRowsChange}
+      />
+    </DragAndDrop>
   );
 }
