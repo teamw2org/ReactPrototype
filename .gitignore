@@ -72,3 +72,4 @@ fabric.properties
 
 /node_modules/
 /QF-Test/**/*.bak
+/QF-Test/**/*.qft_auto
