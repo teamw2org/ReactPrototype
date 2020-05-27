@@ -44,7 +44,11 @@ export default function FlatPlanning() {
           ref={splitterEl}
         >
           <>
-            <Button style={{}} variant="contained" onClick={toggle}>
+            <Button
+              style={{ marginLeft: "8px", marginBottom: "8px" }}
+              variant="contained"
+              onClick={toggle}
+            >
               Assign content
             </Button>
             <BoxTarget />

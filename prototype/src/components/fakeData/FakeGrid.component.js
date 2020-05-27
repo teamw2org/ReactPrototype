@@ -189,7 +189,7 @@ export default function DocumentsGrid() {
   const [viewMode, setViewMode] = useState("grid");
 
   return (
-    <div style={{ height: "100%" }}>
+    <div style={{ height: "94%" }}>
       <IconButton onClick={setViewMode.bind(null, "grid")}>
         <ReorderIcon />
       </IconButton>
