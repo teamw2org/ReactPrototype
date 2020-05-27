@@ -455,7 +455,13 @@ To do this, the component tree of the button is recursively traversed until an i
         <FetchGeometryStep client="$(client)" component="$(document 1)"
                            id="_2Yvp" local="true" xvarname="x1"
                            yvarname="y1"/>
-        <ReturnStep id="_2Yvr" retval="$[$(x1) - $(x0) + $(y1) - $(y0)]"/>
+        <IfSequence id="_2YwV" name="Documents in the same row"
+                    test="abs($(y0) - $(y1)) &lt;= 10">
+          <ReturnStep id="_2Yvr" retval="$[$(x1) - $(x0)]"/>
+          <ElseSequence id="_2YwW" name="Documents in different rows">
+            <ReturnStep id="_2YwX" retval="$[$(y1) - $(y0)]"/>
+          </ElseSequence>
+        </IfSequence>
       </Procedure>
       <Procedure id="_2YvM" name="Switch documents">
         <variable name="document move icon 0"/>
