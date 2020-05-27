@@ -19,11 +19,7 @@ const LeftPage = (props) => {
   }, [checkState]);
 
   const getItems = () => {
-    return Math.random() < 0.3
-      ? getVirtualGridElement1(0)
-      : Math.random() < 0.5
-      ? getVirtualGridElement2(0)
-      : getVirtualGridElement3(0);
+    return getVirtualGridElement3(0);
   };
   const [items, setStateItems] = React.useState([getItems()]);
 

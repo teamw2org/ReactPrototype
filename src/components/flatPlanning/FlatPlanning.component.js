@@ -5,6 +5,7 @@ import Splitter from "m-react-splitters";
 import "m-react-splitters/lib/splitters.css";
 import DragAndDrop from "../utils/DragAndDrop";
 import BoxTarget from "./BoxTarget";
+import TemplateGrid from "../Template/TemplateGrid";
 
 export default function FlatPlanning() {
   return (
@@ -38,7 +39,7 @@ export default function FlatPlanning() {
               postPoned={false}
             >
               <TreeGrid key="1" />
-              <TreeGrid key="2" />
+              <TemplateGrid key="2" />
               {useEffect(() =>
                 document
                   .querySelector(".handle-bar.horizontal")
