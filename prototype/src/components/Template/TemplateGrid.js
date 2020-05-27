@@ -10,6 +10,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TextField from "@material-ui/core/TextField";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
+import "./style.css";
 
 export default function TemplateGrid(props) {
   function createData(template) {
@@ -50,13 +51,23 @@ export default function TemplateGrid(props) {
         <Table aria-label="custom pagination table">
           <TableHead>
             <TableRow>
-              <TableCell>
-                <SearchIcon style={{ fill: "white" }} />
+              <TableCell
+                style={{
+                  padding: "5px",
+                }}
+              >
+                <SearchIcon
+                  style={{
+                    marginTop: "19px",
+                    marginRight: "5px",
+                    fill: "white",
+                  }}
+                />
                 <TextField
                   id="standard-basic"
                   onChange={(e) => filter(e.target.value)}
                   label="Template"
-                  InputProps={{ disableUnderline: true }}
+                  InputProps={{ disableUnderline: true, spellCheck: false }}
                   style={{ color: "white" }}
                 />
               </TableCell>
