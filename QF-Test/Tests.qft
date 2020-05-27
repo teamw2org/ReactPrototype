@@ -178,6 +178,34 @@ It also have functions that are usefull for multiple tests.</comment>
             </UnitStep>
           </TestStep>
         </TestCase>
+        <TestCase id="_2Ywb" name="Add action cat"
+                  reportname="Add action cat to document 10">
+          <TestStep id="_2Yxn"
+                    name="Check that there is no action cat in document 10">
+            <ComponentWaiter absence="true" client="$(client)"
+                             component="Document_10 action cat" id="_2Yxm"
+                             raise="false" timeout="5000"/>
+          </TestStep>
+          <BasicSequence id="_2Yxk" name="Drag action cat to document 11">
+            <MouseEventStep clicks="1" client="$(client)"
+                            component="product - Cats - button"
+                            event="MOUSE_MPRC" id="_2YxH" modifiers="16"/>
+            <MouseEventStep clicks="1" client="$(client)"
+                            component="product - Action Cat"
+                            event="MOUSE_PRESSED" hardevent="true" id="_2Yxi"
+                            modifiers="16"/>
+            <MouseEventStep clicks="1" client="$(client)"
+                            component="Document_10 content"
+                            event="MOUSE_RELEASED" hardevent="true" id="_2Yxj"
+                            modifiers="16"/>
+          </BasicSequence>
+          <TestStep id="_2Yxo"
+                    name="Check that there is action cat in document 10">
+            <ComponentWaiter client="$(client)"
+                             component="Document_10 action cat" id="_2Yxp"
+                             raise="false" timeout="5000"/>
+          </TestStep>
+        </TestCase>
       </TestSet>
     </TestSet>
     <CleanupSequence id="_2YtT" name="Logout and stop SUT">
@@ -591,37 +619,83 @@ To do this, the component tree of the button is recursively traversed until an i
             </ComponentStep>
           </ComponentGroup>
           <ComponentGroup id="_2Yus" name="Flat planning">
-            <ComponentStep class="DIV" id="document_0" uid="_2YvG">
-              <extrafeature name="class" negate="false" regexp="false"
-                            state="1">item muuri-item muuri-item-shown</extrafeature>
-              <extrafeature name="qfs:originalid" negate="false" regexp="true"
-                            state="2">0_document-[0-9]+</extrafeature>
-              <ComponentStep class="SVG" id="document_0 move icon"
-                             uid="_2YvH">
+            <ComponentGroup id="_2YxI" name="Documents">
+              <ComponentStep class="DIV" id="document_0" uid="_2YvG">
                 <extrafeature name="class" negate="false" regexp="false"
-                              state="1">MuiSvgIcon-root move-item-muri</extrafeature>
+                              state="1">item muuri-item muuri-item-shown</extrafeature>
+                <extrafeature name="qfs:originalid" negate="false"
+                              regexp="true" state="2">0_document-[0-9]+</extrafeature>
+                <ComponentStep class="SVG" id="document_0 move icon"
+                               uid="_2YvH">
+                  <extrafeature name="class" negate="false" regexp="false"
+                                state="1">MuiSvgIcon-root move-item-muri</extrafeature>
+                </ComponentStep>
               </ComponentStep>
-            </ComponentStep>
-            <ComponentStep class="DIV" id="document_10" uid="_2YvC">
-              <extrafeature name="class" negate="false" regexp="false"
-                            state="1">item muuri-item muuri-item-shown</extrafeature>
-              <extrafeature name="qfs:originalid" negate="false" regexp="true"
-                            state="2">10_document-[0-9]+</extrafeature>
-              <ComponentStep class="SVG" id="document_10 move icon"
-                             uid="_2YvF">
+              <ComponentStep class="DIV" id="document_10" uid="_2YvC">
                 <extrafeature name="class" negate="false" regexp="false"
-                              state="1">MuiSvgIcon-root move-item-muri</extrafeature>
+                              state="1">item muuri-item muuri-item-shown</extrafeature>
+                <extrafeature name="qfs:originalid" negate="false"
+                              regexp="true" state="2">10_document-[0-9]+</extrafeature>
+                <ComponentStep class="SVG" id="document_10 move icon"
+                               uid="_2YvF">
+                  <extrafeature name="class" negate="false" regexp="false"
+                                state="1">MuiSvgIcon-root move-item-muri</extrafeature>
+                </ComponentStep>
+                <ComponentStep class="DIV" id="Document_10 content"
+                               uid="_2Yxh">
+                  <extrafeature name="class" negate="false" regexp="false"
+                                state="2">board-column-content</extrafeature>
+                  <ComponentStep class="DIV" id="Document_10 action cat"
+                                 uid="_2Yxl">
+                    <extrafeature name="class" negate="false" regexp="false"
+                                  state="2">board-item-content</extrafeature>
+                    <extrafeature name="qfs:originalid" negate="false"
+                                  regexp="true" state="2">Action Cat-[0-9]+</extrafeature>
+                  </ComponentStep>
+                </ComponentStep>
               </ComponentStep>
-            </ComponentStep>
-            <ComponentStep class="DIV" id="document_11" uid="_2YwE">
-              <extrafeature name="class" negate="false" regexp="false"
-                            state="1">item muuri-item muuri-item-shown</extrafeature>
-              <extrafeature name="qfs:originalid" negate="false" regexp="true"
-                            state="2">11_document-[0-9]+</extrafeature>
-              <ComponentStep class="SVG" id="document_11 move icon"
-                             uid="_2YwF">
+              <ComponentStep class="DIV" id="document_11" uid="_2YwE">
                 <extrafeature name="class" negate="false" regexp="false"
-                              state="1">MuiSvgIcon-root move-item-muri</extrafeature>
+                              state="1">item muuri-item muuri-item-shown</extrafeature>
+                <extrafeature name="qfs:originalid" negate="false"
+                              regexp="true" state="2">11_document-[0-9]+</extrafeature>
+                <ComponentStep class="SVG" id="document_11 move icon"
+                               uid="_2YwF">
+                  <extrafeature name="class" negate="false" regexp="false"
+                                state="1">MuiSvgIcon-root move-item-muri</extrafeature>
+                </ComponentStep>
+              </ComponentStep>
+            </ComponentGroup>
+            <ComponentStep class="TABLE" id="Product table" uid="_2Ywp">
+              <extrafeature name="class" negate="false" regexp="false"
+                            state="1">MuiTable-root</extrafeature>
+              <extrafeature name="columns" negate="false" regexp="false"
+                            state="1">3</extrafeature>
+              <ComponentStep class="TH" feature="Cats" id="product - Cats"
+                             uid="_2YxD">
+                <extrafeature name="class" negate="false" regexp="false"
+                              state="1">MuiTableCell-root MuiTableCell-body</extrafeature>
+                <ComponentStep class="Button" classcount="1" classindex="0"
+                               height="30" id="product - Cats - button"
+                               uid="_2YxE" width="30" x="0" y="18">
+                  <extrafeature name="class" negate="false" regexp="false"
+                                state="0">MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall</extrafeature>
+                  <extrafeature name="qfs:class" negate="false" regexp="false"
+                                state="0">BUTTON:BUTTON</extrafeature>
+                  <extrafeature name="qfs:genericclass" negate="false"
+                                regexp="false" state="0">Button</extrafeature>
+                  <extrafeature name="qfs:label" negate="false" regexp="false"
+                                state="1">Template</extrafeature>
+                  <extrafeature name="qfs:systemclass" negate="false"
+                                regexp="false" state="0">BUTTON:BUTTON</extrafeature>
+                  <extrafeature name="tag" negate="false" regexp="false"
+                                state="0">BUTTON:BUTTON</extrafeature>
+                </ComponentStep>
+              </ComponentStep>
+              <ComponentStep class="TH" feature="Action Cat"
+                             id="product - Action Cat" uid="_2YxF">
+                <extrafeature name="class" negate="false" regexp="false"
+                              state="1">MuiTableCell-root MuiTableCell-body</extrafeature>
               </ComponentStep>
             </ComponentStep>
           </ComponentGroup>
