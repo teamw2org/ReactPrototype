@@ -20,10 +20,10 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Logo from "../images/logo.png";
 import BucketsTree from "../components/BucketsTree.component";
-import DocumentsGrid from "../components/DocumentsGrid.component";
+import DocumentsGrid from "../components/fakeData/FakeGrid.component";
 import TreeGrid from "../components/TreeGrid.component";
 import Users from "../components/Users.component";
-import Task from "../components/Task.component";
+import Task from "../components/customTreeGrid/CustomTreeGrid.component";
 import FlatPlanning from "../components/flatPlanning/FlatPlanning.component";
 import LoginPanel from "../components/login/Login.component";
 import Muri from "../components/pages/Muuri.component";
@@ -242,9 +242,6 @@ export default function Dashboard() {
         <Container maxWidth="xl" className={classes.container}>
           {currentLayoutState}
         </Container>
-        <Box pt={4}>
-          <Copyright />
-        </Box>
       </main>
     </div>
   );

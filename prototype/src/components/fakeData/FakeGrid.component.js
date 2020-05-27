@@ -157,7 +157,7 @@ import { AutoSizer, Column, Table } from "react-virtualized";
 import AppsIcon from "@material-ui/icons/Apps";
 import IconButton from "@material-ui/core/IconButton";
 import ReorderIcon from "@material-ui/icons/Reorder";
-import FakeGallery from "./FakeGallery";
+import FakeGallery from "./FakeGallery.component";
 
 const styles = (theme) => ({
   flexContainer: {
@@ -316,7 +316,7 @@ const rows = prepareData();
 
 function prepareData() {
   let preparedData = [];
-  var data = require("../fakeData/fake10000.json");
+  var data = require("../../fakeData/fake10000.json");
   let i = 0;
   for (const element of data.data) {
     i += 1;
@@ -352,30 +352,30 @@ export default function DocumentsGrid() {
             rowGetter={({ index }) => rows[index]}
             columns={[
               {
-                width: 200,
+                width: 500,
                 label: "Name",
                 dataKey: "name",
               },
               {
-                width: 220,
+                width: 370,
                 label: "Lastname",
                 dataKey: "lastname",
                 numeric: false,
               },
               {
-                width: 220,
+                width: 340,
                 label: "Username",
                 dataKey: "username",
                 numeric: false,
               },
               {
-                width: 220,
+                width: 270,
                 label: "Retweet",
                 dataKey: "retweet",
                 numeric: false,
               },
               {
-                width: 300,
+                width: 320,
                 label: "Likes",
                 dataKey: "likes",
                 numeric: false,

@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from "react";
-import TreeGrid from "../Task.component";
+import TreeGrid from "../customTreeGrid/CustomTreeGrid.component";
 import "./FlatPlanning.style.css";
 import Splitter from "m-react-splitters";
 import "m-react-splitters/lib/splitters.css";
 import DragAndDrop from "../utils/DragAndDrop";
 import BoxTarget from "./BoxTarget";
-import TemplateGrid from "../Template/TemplateGrid";
+import TemplateGrid from "../template/TemplateGrid";
 
 export default function FlatPlanning() {
   return (
