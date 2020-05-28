@@ -67,7 +67,7 @@ const App = (props) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        maxHeight: "calc(100% - 38px)",
+        maxHeight: "100%",
       }}
     >
       <div style={{ boxSizing: "border-box", paddingBottom: "10px" }}>

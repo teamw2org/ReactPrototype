@@ -16,10 +16,11 @@ import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import { createStore } from "redux";
+import { reducerActions } from "../../redux/UserReducer";
+import {connect} from "react-redux"
 import "./style.css";
 
 function descendingComparator(a, b, orderBy) {
@@ -51,10 +52,10 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: "name", numeric: false, disablePadding: true, label: "Name" },
   { id: "image", numeric: false, disablePadding: true, label: "Image" },
-  { id: "username", numeric: false, disablePadding: false, label: "Username" },
-  { id: "email", numeric: false, disablePadding: false, label: "Email" },
-  { id: "phone", numeric: false, disablePadding: false, label: "Phone" },
-  { id: "website", numeric: false, disablePadding: false, label: "Website" },
+  { id: "username", numeric: true, disablePadding: false, label: "Username" },
+  { id: "email", numeric: true, disablePadding: false, label: "Email" },
+  { id: "phone", numeric: true, disablePadding: false, label: "Phone" },
+  { id: "website", numeric: true, disablePadding: false, label: "Website" },
 ];
 
 function EnhancedTableHead(props) {
@@ -203,68 +204,76 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable() {
+function EnhancedTable(props) {
   const classes = useStyles();
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("username");
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  let [usersState, setUsersState] = React.useState([]);
+  //const [order, setOrder] = React.useState("asc");
+  //const [orderBy, setOrderBy] = React.useState("username");
+  //const [selected, setSelected] = React.useState([]);
+  //const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  //let [usersState, setUsersState] = React.useState([]);
 
+
+  // changeOrder: order => dispatch({ type: reducerActions.CHANGE_ORDER, order: order }),
+  //     changeRowsPerPage: rowsPerPage => dispatch({ type: reducerActions.CHANGE_ROWS_PER_PAGE, rowsPerPage: rowsPerPage }),
+  //     changeSelected: selected => dispatch({ type: reducerActions.CHANGE_SELECTED, selected: selected }),
+  //     changeUsersState: usersState => dispatch({ type: reducerActions.CHANGE_USERS_STATE, usersState: usersState }),
+
+
+  const state = props.state;
+  const page = state.page;
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
+    const isAsc = state.orderBy === property && state.order === "asc";
+    props.changeOrder(isAsc ? "desc" : "asc");
+    props.changeOrderBy(property);
   };
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = usersState.map((n) => n.name);
-      setSelected(newSelecteds);
+      const newSelecteds = state.usersState.map((n) => n.name);
+      props.changeSelected(newSelecteds);
       return;
     }
-    setSelected([]);
+    props.changeSelected([]);
   };
 
   const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+    const selectedIndex = state.selected.indexOf(name);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(state.selected, name);
     } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
+      newSelected = newSelected.concat(state.selected.slice(1));
+    } else if (selectedIndex === state.selected.length - 1) {
+      newSelected = newSelected.concat(state.selected.slice(0, -1));
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
+          state.selected.slice(0, selectedIndex),
+          state.selected.slice(selectedIndex + 1)
       );
     }
 
-    setSelected(newSelected);
+    props.changeSelected(newSelected);
   };
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+    props.changePage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    props.changeRowsPerPage(parseInt(event.target.value, 10));
+    //store.dispatch({ type: reducerActions.CHANGE_PAGE, page: 0 });
+    props.changePage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (name) => state.selected.indexOf(name) !== -1;
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, usersState.length - page * rowsPerPage);
+      state.rowsPerPage -
+    Math.min(
+        state.rowsPerPage,
+      state.usersState.length - state.page * state.rowsPerPage
+    );
 
   function fetchData() {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -281,36 +290,40 @@ export default function EnhancedTable() {
   }
 
   useEffect(() => {
-    fetchData();
+    if(state.usersState.length === 0) {
+      fetchData();
+    }
   }, []);
 
   function setDataState(responseJson) {
-    setUsersState(responseJson);
+    props.changeUsersState(responseJson);
   }
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={state.selected.length} />
         <TableContainer>
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
+            size={"medium"}
             aria-label="enhanced table"
           >
             <EnhancedTableHead
               classes={classes}
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
+              numSelected={state.selected.length}
+              order={state.order}
+              orderBy={state.orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={usersState.length}
+              rowCount={state.usersState.length}
             />
             <TableBody>
-              {stableSort(usersState, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              {stableSort(state.usersState, getComparator(state.order, state.orderBy))
+                .slice(
+                    state.page * state.rowsPerPage, state.page * state.rowsPerPage + state.rowsPerPage
+                )
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
@@ -354,7 +367,7 @@ export default function EnhancedTable() {
                   );
                 })}
               {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                <TableRow style={{ height: 53 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}
@@ -364,9 +377,9 @@ export default function EnhancedTable() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={usersState.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
+          count={state.usersState.length}
+          rowsPerPage={state.rowsPerPage}
+          page={state.page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
@@ -374,3 +387,18 @@ export default function EnhancedTable() {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  state : state
+})
+
+const mapDispatchToProps = dispatch => ({
+  changePage: page => dispatch({ type: reducerActions.CHANGE_PAGE, page: page }),
+  changeOrderBy: orderBy => dispatch({ type: reducerActions.CHANGE_ORDER_BY, orderBy: orderBy }),
+  changeOrder: order => dispatch({ type: reducerActions.CHANGE_ORDER, order: order }),
+  changeRowsPerPage: rowsPerPage => dispatch({ type: reducerActions.CHANGE_ROWS_PER_PAGE, rowsPerPage: rowsPerPage }),
+  changeSelected: selected => dispatch({ type: reducerActions.CHANGE_SELECTED, selected: selected }),
+  changeUsersState: usersState => dispatch({ type: reducerActions.CHANGE_USERS_STATE, usersState: usersState }),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps) (EnhancedTable)
