@@ -229,6 +229,18 @@ It also have functions that are usefull for multiple tests.</comment>
           </CommentStep>
         </TestCase>
       </TestSet>
+      <TestSet disabled="true" id="_2Yzc" name="Custom tree grid">
+        <SetupSequence id="_2Yzd" name="Go to custom tree grid">
+          <MouseEventStep clicks="1" client="$(client)"
+                          component="menuContentTreeGrid" event="MOUSE_MPRC"
+                          id="_2Yze" modifiers="16"/>
+        </SetupSequence>
+        <TestCase id="_2Yzf" name="Find sleeping cat">
+          <CommentStep id="_2Yzg">
+            <heading>Dunno how to expand Cats</heading>
+          </CommentStep>
+        </TestCase>
+      </TestSet>
     </TestSet>
     <CleanupSequence id="_2YtT" name="Logout and stop SUT">
       <ProcedureCall id="_2YtV" procedure="General.Stop SUT"/>
@@ -572,8 +584,8 @@ To do this, the component tree of the button is recursively traversed until an i
                          name="menuContentTreeGrid" uid="_2YuF">
             <extrafeature name="id" negate="false" regexp="false" state="2">menuContentTreeGrid</extrafeature>
           </ComponentStep>
-          <ComponentStep class="Button" id="menuTask" name="menuTask"
-                         uid="_2YuG">
+          <ComponentStep class="Button" id="menuCustomTreeGrid"
+                         name="menuTask" uid="_2YuG">
             <extrafeature name="id" negate="false" regexp="false" state="2">menuTask</extrafeature>
           </ComponentStep>
           <ComponentStep class="Button" id="menuUsers" name="menuUsers"
@@ -742,6 +754,16 @@ To do this, the component tree of the button is recursively traversed until an i
             <ComponentStep class="DIV" id="Column select buttons" uid="_2YzH">
               <extrafeature name="class" negate="false" regexp="false"
                             state="1">p-multiselect p-component</extrafeature>
+            </ComponentStep>
+          </ComponentGroup>
+          <ComponentGroup id="_2Yza" name="Custom tree grid">
+            <ComponentStep class="TABLE" id="Tree grid" uid="_2YzU">
+              <extrafeature name="class" negate="false" regexp="false"
+                            state="1">MuiTable-root MuiTable-stickyHeader</extrafeature>
+              <SubItemStep id="Tree grid item - Cats" uid="_2Yzb">
+                <primary>Label</primary>
+                <secondary>Cats</secondary>
+              </SubItemStep>
             </ComponentStep>
           </ComponentGroup>
         </ComponentStep>
