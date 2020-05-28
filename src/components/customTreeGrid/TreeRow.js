@@ -118,6 +118,7 @@ export default function TreeRow(props) {
             setOpen(!row.expanded);
             onExpand({ row: row, isExpanded: !row.expanded });
           }}
+          className="expandButton"
         >
           {row.expanded ? (
             <KeyboardArrowDownIcon style={{ color: "00676C" }} />

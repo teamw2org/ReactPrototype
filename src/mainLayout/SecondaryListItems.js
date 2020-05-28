@@ -15,6 +15,7 @@ export default function secondaryListItems(props) {
         id="menuContentTreeGrid"
         button
         onClick={props.changeLayout.bind(null, "contentTreeGrid")}
+        title="Content Tree Grid"
       >
         <ListItemIcon>
           <FormatListBulletedIcon />
@@ -25,6 +26,7 @@ export default function secondaryListItems(props) {
         id="menuTask"
         button
         onClick={props.changeLayout.bind(null, "task")}
+        title="Custom Tree Grid"
       >
         <ListItemIcon>
           <AssignmentIcon />
@@ -35,6 +37,7 @@ export default function secondaryListItems(props) {
         id="menuUsers"
         button
         onClick={props.changeLayout.bind(null, "users")}
+        title="Users"
       >
         <ListItemIcon>
           <GroupIcon />

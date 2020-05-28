@@ -1,5 +1,7 @@
-export const store = {
-  listName: "Favourite",
-  movies: ["Rambo III", "Hakerzy", "Matrix"],
-  fakeDataViewMode: "grid", //gallery
-};
+import React from "react";
+import {createStore} from "redux";
+import {usersReducer} from "./UserReducer";
+
+const store = createStore(usersReducer);
+
+export default store;

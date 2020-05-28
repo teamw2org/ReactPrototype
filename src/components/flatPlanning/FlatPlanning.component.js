@@ -11,7 +11,6 @@ import Button from "@material-ui/core/Button";
 export default function FlatPlanning() {
   const splitterEl = useRef(null);
   const [buttonColor, setButtonColor] = useState("lightgrey");
-  const [buttonTextColor, setButtonTextColor] = useState("black");
 
   const toggle = () => {
     const primaryPane = document.querySelector(".vertical.primary");
@@ -19,7 +18,6 @@ export default function FlatPlanning() {
       primaryPane.style.width !== "calc(100% - 10px)"
         ? (primaryPane.style.width = "calc(100% - 10px)")
         : (primaryPane.style.width = "70%");
-      window.dispatchEvent(new Event("resize"));
     }
   };
 
@@ -46,26 +44,6 @@ export default function FlatPlanning() {
           ref={splitterEl}
         >
           <>
-            <Button
-              style={{
-                marginLeft: "8px",
-                marginBottom: "8px",
-                backgroundColor: buttonColor,
-                color: buttonTextColor,
-              }}
-              variant="contained"
-              onClick={() => {
-                toggle();
-                setButtonColor(
-                  buttonColor === "lightgrey" ? "#00B0BC" : "lightgrey"
-                );
-                setButtonTextColor(
-                  buttonTextColor === "black" ? "white" : "black"
-                );
-              }}
-            >
-              Assign content
-            </Button>
             <BoxTarget />
           </>
           <div style={{ width: "100%", height: "100%", padding: "3px 3px" }}>
@@ -82,21 +60,27 @@ export default function FlatPlanning() {
               {useEffect(() =>
                 document
                   .querySelector(".handle-bar.horizontal")
-                  .addEventListener("dblclick", () => {
-                    const primaryPane = document.querySelector(
-                      ".horizontal.primary"
-                    );
-                    primaryPane.style.height !== "calc(100% - 10px)"
-                      ? (primaryPane.style.height = "calc(100% - 10px)")
-                      : (primaryPane.style.height = "50%");
-                  })
+                  .addEventListener(
+                    "dblclick",
+                    () => {
+                      const primaryPane = document.querySelector(
+                        ".horizontal.primary"
+                      );
+                      primaryPane.style.height !== "calc(100% - 10px)"
+                        ? (primaryPane.style.height = "calc(100% - 10px)")
+                        : (primaryPane.style.height = "50%");
+                    },
+                    []
+                  )
               )}
               {useEffect(() =>
-                document
-                  .querySelector(".handle-bar.vertical")
-                  .addEventListener("dblclick", () => {
+                document.querySelector(".handle-bar.vertical").addEventListener(
+                  "dblclick",
+                  () => {
                     toggle();
-                  })
+                  },
+                  []
+                )
               )}
             </Splitter>
           </div>
