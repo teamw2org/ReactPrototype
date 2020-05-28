@@ -15,6 +15,7 @@ export default function mainListItems(props) {
         id="menuContent"
         button
         onClick={props.changeLayout.bind(null, "content")}
+        title="Content"
       >
         <ListItemIcon>
           <FolderSpecialIcon />
@@ -25,6 +26,7 @@ export default function mainListItems(props) {
         id="menuDocuments"
         button
         onClick={props.changeLayout.bind(null, "documents")}
+        title="10.000 items"
       >
         <ListItemIcon>
           <StorageIcon />
@@ -35,6 +37,7 @@ export default function mainListItems(props) {
         id="menuFlat_planning"
         button
         onClick={props.changeLayout.bind(null, "flat_planning")}
+        title="Flat planning"
       >
         <ListItemIcon>
           <BorderClearIcon />

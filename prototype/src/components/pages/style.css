@@ -625,6 +625,9 @@ section h4 {
     margin: 5px 15px 0px 15px;
     height: 29.4px;
     line-height: 29.4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .tab-item {
