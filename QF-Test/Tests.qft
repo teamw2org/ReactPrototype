@@ -212,6 +212,23 @@ It also have functions that are usefull for multiple tests.</comment>
           </TestStep>
         </TestCase>
       </TestSet>
+      <TestSet disabled="true" id="_2Yy1" name="Content tree grid">
+        <SetupSequence id="_2Yy2" name="Go to content tree grid">
+          <MouseEventStep clicks="1" client="$(client)"
+                          component="menuContentTreeGrid" event="MOUSE_MPRC"
+                          id="_2Yy3" modifiers="16"/>
+        </SetupSequence>
+        <TestCase id="_2Yy4" name="Find sleeping cat">
+          <CommentStep id="_2Yyk">
+            <heading>Dunno how to expand Cats</heading>
+          </CommentStep>
+        </TestCase>
+        <TestCase id="_2YzK" name="Hide column &#34;type&#34;">
+          <CommentStep id="_2YzL">
+            <heading>Know nothin</heading>
+          </CommentStep>
+        </TestCase>
+      </TestSet>
     </TestSet>
     <CleanupSequence id="_2YtT" name="Logout and stop SUT">
       <ProcedureCall id="_2YtV" procedure="General.Stop SUT"/>
@@ -711,6 +728,20 @@ To do this, the component tree of the button is recursively traversed until an i
                 <extrafeature name="class" negate="false" regexp="false"
                               state="1">MuiTableCell-root MuiTableCell-body</extrafeature>
               </ComponentStep>
+            </ComponentStep>
+          </ComponentGroup>
+          <ComponentGroup id="_2Yyi" name="Content tree grid">
+            <ComponentStep class="TABLE" id="Content table" uid="_2Yyd">
+              <extrafeature name="class" negate="false" regexp="false"
+                            state="1">p-treetable-scrollable-body-table</extrafeature>
+              <SubItemStep id="Content table cell - Cats" uid="_2Yyj">
+                <primary type="number">0</primary>
+                <secondary>Cats</secondary>
+              </SubItemStep>
+            </ComponentStep>
+            <ComponentStep class="DIV" id="Column select buttons" uid="_2YzH">
+              <extrafeature name="class" negate="false" regexp="false"
+                            state="1">p-multiselect p-component</extrafeature>
             </ComponentStep>
           </ComponentGroup>
         </ComponentStep>
