@@ -118,6 +118,7 @@ export default function TreeRow(props) {
             setOpen(!row.expanded);
             onExpand({ row: row, isExpanded: !row.expanded });
           }}
+          id={row[name] + "-" + Date.now()}
           className="expandButton"
         >
           {row.expanded ? (
