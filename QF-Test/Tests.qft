@@ -229,16 +229,42 @@ It also have functions that are usefull for multiple tests.</comment>
           </CommentStep>
         </TestCase>
       </TestSet>
-      <TestSet disabled="true" id="_2Yzc" name="Custom tree grid">
+      <TestSet id="_2Yzc" name="Custom tree grid">
         <SetupSequence id="_2Yzd" name="Go to custom tree grid">
           <MouseEventStep clicks="1" client="$(client)"
                           component="menuContentTreeGrid" event="MOUSE_MPRC"
                           id="_2Yze" modifiers="16"/>
         </SetupSequence>
         <TestCase id="_2Yzf" name="Find sleeping cat">
-          <CommentStep id="_2Yzg">
-            <heading>Dunno how to expand Cats</heading>
-          </CommentStep>
+          <TestStep id="_2Y+5" name="The should not be sleeping cat yet">
+            <ComponentWaiter absence="true" client="$(client)"
+                             component="Tree grid item - Sleeping cat"
+                             id="_2Y+6" raise="false" timeout="5000"/>
+          </TestStep>
+          <MouseEventStep clicks="1" client="$(client)" component="Cats-"
+                          event="MOUSE_MPRC" id="_2Y+9" modifiers="16"/>
+          <TestStep id="_2Y+A" name="The should be sleeping cat now">
+            <ComponentWaiter client="$(client)"
+                             component="Tree grid item - Sleeping cat"
+                             id="_2Y+B" raise="false" timeout="5000"/>
+          </TestStep>
+        </TestCase>
+        <TestCase id="_2Y+C" name="Test sorting">
+          <MouseEventStep clicks="1" client="$(client)"
+                          component="Tree grid item - Identifier column"
+                          event="MOUSE_MPRC" hardevent="true" id="_2Y+E"
+                          modifiers="16"/>
+          <FetchIndexStep client="$(client)" component="Tree grid@Label@Cats"
+                          id="_2Y+G" local="true" varname="index0"/>
+          <MouseEventStep clicks="1" client="$(client)"
+                          component="Tree grid item - Identifier column"
+                          event="MOUSE_MPRC" hardevent="true" id="_2Y+H"
+                          modifiers="16"/>
+          <FetchIndexStep client="$(client)" component="Tree grid@Label@Cats"
+                          id="_2Y+K" local="true" varname="index1"/>
+          <UnitStep client="$(client)" id="_2Y+J">
+            <code>rc.check($(index0) != $(index1), 'Cats should be on different position in the table')</code>
+          </UnitStep>
         </TestCase>
       </TestSet>
     </TestSet>
@@ -760,10 +786,26 @@ To do this, the component tree of the button is recursively traversed until an i
             <ComponentStep class="TABLE" id="Tree grid" uid="_2YzU">
               <extrafeature name="class" negate="false" regexp="false"
                             state="1">MuiTable-root MuiTable-stickyHeader</extrafeature>
+              <SubItemStep id="Tree grid item - Identifier column"
+                           uid="_2Y+D">
+                <primary type="regexp">.*\bIdentifier\b.*</primary>
+              </SubItemStep>
               <SubItemStep id="Tree grid item - Cats" uid="_2Yzb">
                 <primary>Label</primary>
                 <secondary>Cats</secondary>
               </SubItemStep>
+              <SubItemStep id="Tree grid item - Sleeping cat" uid="_2Y+8">
+                <primary>Label</primary>
+                <secondary>Sleeping Cat</secondary>
+              </SubItemStep>
+              <ComponentStep class="Button" classcount="1" classindex="0"
+                             feature="Cats-" height="30" id="Cats-"
+                             name="Cats-" uid="_2Y+4" width="30" x="0" y="16">
+                <extrafeature name="class" negate="false" regexp="false"
+                              state="1">MuiButtonBase-root MuiIconButton-root expandButton MuiIconButton-sizeSmall</extrafeature>
+                <extrafeature name="qfs:originalid" negate="false"
+                              regexp="true" state="2">Cats-[0-9]+</extrafeature>
+              </ComponentStep>
             </ComponentStep>
           </ComponentGroup>
         </ComponentStep>
