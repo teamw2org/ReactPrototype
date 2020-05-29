@@ -13,13 +13,11 @@ function App() {
     setIsLoggedIn(!isLoggedIn);
   };
 
-  return <MainLayout />;
-
-  // if (isLoggedIn) {
-  //   return <MainLayout />;
-  // } else {
-  //   return <Login handler={loginHandler} />;
-  // }
+  if (isLoggedIn) {
+    return <MainLayout />;
+  } else {
+    return <Login handler={loginHandler} />;
+  }
 }
 
 export default App;
