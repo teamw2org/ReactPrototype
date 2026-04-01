@@ -23,7 +23,7 @@
     "react-draggable": "^4.4.2",
     "react-native-base64": "0.0.2",
     "react-redux": "^7.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "react-virtual-draggable-grid": "^0.9.1-beta",
     "react-virtualized": "^9.21.2",
     "redux": "^4.0.5"
